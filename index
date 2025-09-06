@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jamaica 2025 - The Journey Awaits</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+/* ---------- RESET & ROOT ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg-primary: #121212;
+    --bg-secondary: #1E1E1E;
+    --text-primary: #FFFFFF;
+    --text-secondary: #b0b0b0;
+    --jamaican-gold: #F9A825;
+    --deep-emerald: #005B41;
+    --shadow: 0 25px 50px rgba(0,0,0,0.3);
+    --shadow-light: 0 10px 25px rgba(0,0,0,0.2);
+}
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.8;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    overflow-x: hidden;
+    cursor: none;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+/* ---------- CURSOR ---------- */
+.cursor-dot {
+    width: 8px; height: 8px; background-color: var(--jamaican-gold);
+    position: fixed; border-radius: 50%; transform: translate(-50%, -50%);
+    pointer-events: none; z-index: 9999; transition: transform 0.2s ease-out;
+}
+.cursor-outline {
+    width: 40px; height: 40px; border: 2px solid var(--jamaican-gold);
+    position: fixed; border-radius: 50%; transform: translate(-50%, -50%);
+    pointer-events: none; z-index: 9999; transition: all 0.2s ease-out;
+}
+a:hover ~ .cursor-outline, button:hover ~ .cursor-outline, .day-item:hover ~ .cursor-outline, .modal-nav:hover ~ .cursor-outline, .adventure-card:hover ~ .cursor-outline { transform: translate(-50%, -50%) scale(1.5); }
+
+/* ---------- HERO ---------- */
+.hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-bg {
+    position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
+    background: url('https://images.unsplash.com/photo-1517495306984-f84210c9c24a?q=80&w=2070&auto=format&fit=crop') center/cover;
+    animation: kenBurns 30s ease-in-out infinite alternate; z-index: -2;
+}
+@keyframes kenBurns { from { transform: scale(1) translate(0,0);} to {transform: scale(1.1) translate(-2%,2%);} }
+.hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%); z-index: -1;
+}
+.hero-content { text-align: center; z-index: 2; color: white; text-shadow: 0 8px 32px rgba(0,0,0,0.6); max-width: 900px; }
+.hero h1 {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 18vw, 15rem);
+    letter-spacing: 0.15em; margin: 0; animation: fadeInUp 1.5s ease-out; line-height: 1;
+}
+.hero .subtitle {
+    font-size: 1.5rem; font-weight: 300; margin-bottom: 3rem;
+    animation: fadeInUp 1.5s ease-out 0.3s both; letter-spacing: 2px; text-transform: uppercase;
+}
+
+/* ---------- COUNTDOWN ---------- */
+.countdown {
+    background: rgba(0,0,0,0.3); backdrop-filter: blur(15px); padding: 2rem;
+    border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
+    animation: fadeInUp 1.5s ease-out 0.6s both; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.countdown-timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.countdown-item { text-align: center; }
+.countdown-number { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; display: block; color: var(--jamaican-gold); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.countdown-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ---------- NAVBAR ---------- */
+nav {
+    position: fixed; top: 0; width: 100%;
+    background: rgba(18,18,18,0.8); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.1); z-index: 1000;
+    transform: translateY(-100%); transition: transform 0.4s ease-out;
+}
+nav.visible { transform: translateY(0); }
+nav .container { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--jamaican-gold); text-decoration: none; letter-spacing: 0.1em; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 1rem; position: relative; transition: color 0.3s ease; }
+.nav-links a:hover { color: var(--jamaican-gold); }
+.nav-links a::after {
+    content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+    background: var(--jamaican-gold); transition: width 0.3s ease;
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* ---------- SECTIONS ---------- */
+section { padding: 8rem 0; }
+.section-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 4rem; text-align: center;
+    margin-bottom: 1.5rem; color: var(--text-primary); letter-spacing: 0.05em;
+}
+.section-subtitle { text-align: center; font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 5rem; font-weight: 300; }
+
+/* ---------- ITINERARY ---------- */
+.itinerary-list { max-width: 900px; margin: 0 auto; }
+.day-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 2rem; border-bottom: 1px solid #333; cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.day-item:hover { background-color: var(--bg-secondary); }
+.day-info { display: flex; align-items: center; gap: 2rem; }
+.day-number { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--deep-emerald); }
+.day-title { font-size: 1.5rem; font-weight: 500; }
+.day-vibe { font-size: 1rem; color: var(--text-secondary); }
+.day-item i { font-size: 1.5rem; color: var(--jamaican-gold); }
+.day-date { font-weight: 600; color: var(--jamaican-gold); margin-left: auto; margin-right: 2rem; }
+
+/* ---------- MODALS ---------- */
+.details-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+    z-index: 2000; display: none; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.4s ease;
+}
+.details-modal.visible { opacity: 1; }
+.details-modal-content {
+    background: var(--bg-secondary); border-radius: 20px;
+    width: 90%; max-width: 800px; height: 80vh; max-height: 600px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    box-shadow: var(--shadow); overflow: hidden;
+    transform: scale(0.95); transition: transform 0.4s ease-out;
+    position: relative;
+}
+.details-modal.visible .details-modal-content { transform: scale(1); }
+.details-media-container { width: 100%; height: 100%; background-color: #000; }
+.details-media-container iframe, .details-media-container img { width: 100%; height: 100%; object-fit: cover; border: none; }
+.details-text { padding: 2.5rem; overflow-y: auto; }
+.details-text h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--jamaican-gold); }
+.details-text .modal-date { font-size: 1rem; color: var(--text-secondary); margin-top: -1rem; margin-bottom: 1rem; font-weight: 500;}
+.details-text h4 { margin-top: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 0.5rem; }
+.details-text ul { list-style: none; padding-left: 0; font-size: 0.95rem; color: var(--text-secondary); }
+.details-text li { margin-bottom: 0.5rem; }
+.close-modal { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: white; cursor: pointer; z-index: 10; }
+.modal-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; transition: background-color 0.3s; z-index: 10; }
+.modal-nav:hover { background: var(--jamaican-gold); color: #121212; }
+#prevDay { left: 10px; }
+#nextDay { right: 10px; }
+
+/* ---------- PASSWORD MODAL ---------- */
+.password-modal { display: none; align-items: center; justify-content: center; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 3000; opacity: 0; transition: opacity 0.4s; }
+.password-modal.visible { display: flex; opacity: 1; }
+.password-modal-content { background: var(--bg-secondary); padding: 3rem; border-radius: 20px; max-width: 400px; width: 90%; text-align: center; box-shadow: var(--shadow); }
+.password-modal-content input { width: 100%; padding: 0.8rem 1rem; border-radius: 10px; border: none; margin-bottom: 1rem; font-size: 1rem; }
+.password-modal-content button { padding: 0.8rem 1.5rem; border: none; border-radius: 10px; background: var(--jamaican-gold); color: #121212; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.password-modal-content button:hover { background: var(--deep-emerald); color: white; }
+
+/* ---------- LOADING ---------- */
+#loadingScreen { position: fixed; top:0; left:0; width:100%; height:100%; background:#121212; display:flex; align-items:center; justify-content:center; z-index:9999; transition: opacity 0.8s; }
+#loadingScreen h1 { font-family:'Bebas Neue'; font-size:4rem; color: var(--jamaican-gold); letter-spacing:0.1em; }
+
+/* ---------- ADVENTURES ---------- */
+.adventures { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 2rem; }
+.adventure-card { background: var(--bg-secondary); border-radius: 15px; overflow:hidden; box-shadow: var(--shadow-light); transition: transform 0.3s; cursor:pointer; }
+.adventure-card img { width:100%; height:180px; object-fit:cover; }
+.adventure-card-content { padding: 1.5rem; }
+.adventure-card h4 { margin-bottom: 0.5rem; font-size:1.2rem; color: var(--jamaican-gold); }
+.adventure-card p { font-size:0.95rem; color: var(--text-secondary); }
+.adventure-card:hover { transform: translateY(-10px); }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<!-- LOADING SCREEN -->
+<div id="loadingScreen"><h1>Jamaica 2025</h1></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <a href="#" class="nav-logo">Jamaica 2025</a>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#countdownSection">Countdown</a></li>
+      <li><a href="#itinerary">Itinerary</a></li>
+      <li><a href="#adventures">Adventures</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Jamaica 2025</h1>
+    <p class="subtitle">The Adventure Awaits</p>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section id="countdownSection" class="container">
+  <div class="countdown">
+    <div class="countdown-timer">
+      <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
+      <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hours</span></div>
+      <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Minutes</span></div>
+      <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Seconds</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section id="itinerary">
+  <h2 class="section-title">Itinerary</h2>
+  <p class="section-subtitle">Check out each day of our adventure</p>
+  <div class="itinerary-list"></div>
+</section>
+
+<!-- ADVENTURES -->
+<section id="adventures">
+  <h2 class="section-title">Adventures</h2>
+  <p class="section-subtitle">Exciting things to do while in Jamaica</p>
+  <div class="adventures"></div>
+</section>
+
+<!-- DETAILS MODAL -->
+<div class="details-modal" id="detailsModal">
+  <div class="details-modal-content">
+    <div class="details-media-container" id="modalMediaContainer"></div>
+    <div class="details-text" id="modalText"></div>
+    <div class="modal-nav" id="prevDay"><i class="fas fa-chevron-left"></i></div>
+    <div class="modal-nav" id="nextDay"><i class="fas fa-chevron-right"></i></div>
+    <div class="close-modal" onclick="closeDetailsModal()">&times;</div>
+  </div>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div class="password-modal" id="passwordModal">
+  <div class="password-modal-content">
+    <h3>Enter Password</h3>
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button onclick="checkPassword()">Unlock</button>
+  </div>
+</div>
+
+<script>
+// ----- CURSOR -----
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorOutline = document.querySelector('.cursor-outline');
+window.addEventListener('mousemove', e => {
+    cursorDot.style.left = `${e.clientX}px`;
+    cursorDot.style.top = `${e.clientY}px`;
+    cursorOutline.style.left = `${e.clientX}px`;
+    cursorOutline.style.top = `${e.clientY}px`;
+});
+
+// ----- LOADING SCREEN -----
+window.addEventListener('load', () => {
+    document.getElementById('loadingScreen').style.opacity='0';
+    setTimeout(()=>document.getElementById('loadingScreen').style.display='none',800);
+});
+
+// ----- NAVBAR -----
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll',()=>nav.classList.toggle('visible',window.scrollY>50));
+
+// ----- DAY DATA -----
+const dayData = {
+  day1: { title: "Arrival", date:"Nov 20", fullDate:"Nov 20, 2025", vibe:"Relaxing", image:"https://images.unsplash.com/photo-1517495306984-f84210c9c24a?q=80&w=800&auto=format&fit=crop" },
+  day2: { title: "Beach Day", date:"Nov 21", fullDate:"Nov 21, 2025", vibe:"Sunny", image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" },
+  day3: { title: "Rainforest Hike", date:"Nov 22", fullDate:"Nov 22, 2025", vibe:"Adventurous", image:"https://images.unsplash.com/photo-1516569422543-66fc775c3f9a?q=80&w=800&auto=format&fit=crop" },
+  day8: { title: "Surprise Birthday", date:"Nov 24", fullDate:"Nov 24, 2025", vibe:"Special", special:true, placeholder:"🎁 Surprise day! Enter password to unlock.", secret:"🥳 Happy Birthday! Enjoy your special surprise!", image:"https://images.unsplash.com/photo-1516715094481-0ef25c5c7a0a?q=80&w=800&auto=format&fit=crop" }
+};
+
+// ----- ITINERARY LIST -----
+const itineraryList = document.querySelector('.itinerary-list');
+Object.keys(dayData).forEach(key=>{
+  const day = dayData[key];
+  const div = document.createElement('div');
+  div.className='day-item';
+  div.onclick = ()=>openDetailsModal(key);
+  div.innerHTML=`<div class="day-info"><span class="day-number">${key.replace('day','').padStart(2,'0')}</span><div><div class="day-title">${day.title}</div><div class="day-vibe">${day.vibe}</div></div></div><div class="day-date">${day.date}</div><i class="fas ${day.special?'fa-lock':'fa-arrow-right'}"></i>`;
+  itineraryList.appendChild(div);
+});
+
+// ----- MODAL LOGIC -----
+const detailsModal = document.getElementById('detailsModal');
+const mediaContainer = document.getElementById('modalMediaContainer');
+const modalText = document.getElementById('modalText');
+const passwordModal = document.getElementById('passwordModal');
+const prevDayButton = document.getElementById('prevDay');
+const nextDayButton = document.getElementById('nextDay');
+let currentDayIndex = 0;
+let isSpecialDayUnlocked = false;
+const dayKeys = Object.keys(dayData);
+
+function openDetailsModal(dayKey, fromNav=false){
+  currentDayIndex = dayKeys.indexOf(dayKey);
+  const data = dayData[dayKey];
+  if(data.special && !isSpecialDayUnlocked && !fromNav){
+    passwordModal.style.display='flex';
+    setTimeout(()=>passwordModal.classList.add('visible'),10);
+    return;
+  }
+  if(data.image) mediaContainer.innerHTML=`<img src="${data.image}" alt="${data.title}">`;
+  let html=`<h3>${data.title}</h3><div class="modal-date">${data.fullDate}</div>`;
+  if(data.special && isSpecialDayUnlocked) html+=data.secret;
+  else html+=data.placeholder||"";
+  modalText.innerHTML=html;
+  detailsModal.style.display='flex';
+  setTimeout(()=>detailsModal.classList.add('visible'),10);
+  updateNavButtons();
+}
+
+function closeDetailsModal(){
+  detailsModal.classList.remove('visible');
+  setTimeout(()=>{detailsModal.style.display='none'; mediaContainer.innerHTML='';},400);
+}
+
+function checkPassword(){
+  if(document.getElementById('passwordInput').value.toLowerCase()==='sue'){
+    isSpecialDayUnlocked=true;
+    passwordModal.classList.remove('visible');
+    setTimeout(()=>passwordModal.style.display='none',400);
+    openDetailsModal(dayKeys[currentDayIndex],true);
+  }else alert('Incorrect password!');
+}
+
+function updateNavButtons(){
+  let prevIndex=currentDayIndex-1;
+  while(prevIndex>=0 && dayData[dayKeys[prevIndex]].special && !isSpecialDayUnlocked) prevIndex--;
+  prevDayButton.style.display=prevIndex<0?'none':'flex';
+  let nextIndex=currentDayIndex+1;
+  while(nextIndex<dayKeys.length && dayData[dayKeys[nextIndex]].special && !isSpecialDayUnlocked) nextIndex++;
+  nextDayButton.style.display=nextIndex>=dayKeys.length?'none':'flex';
+}
+
+prevDayButton.onclick=()=>{let i=currentDayIndex-1; while(i>=0 && dayData[dayKeys[i]].special && !isSpecialDayUnlocked)i--; if(i>=0) openDetailsModal(dayKeys[i],true);}
+nextDayButton.onclick=()=>{let i=currentDayIndex+1; while(i<dayKeys.length && dayData[dayKeys[i]].special && !isSpecialDayUnlocked)i++; if(i<dayKeys.length) openDetailsModal(dayKeys[i],true);}
+
+// ----- COUNTDOWN -----
+function countdown(){
+  const target=new Date('2025-11-20T00:00:00');
+  const now=new Date();
+  const diff=target-now;
+  if(diff<=0){document.getElementById('days').innerText='00'; document.getElementById('hours').innerText='00'; document.getElementById('minutes').innerText='00'; document.getElementById('seconds').innerText='00'; return;}
+  const days=Math.floor(diff/(1000*60*60*24)).toString().padStart(2,'0');
+  const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60)).toString().padStart(2,'0');
+  const minutes=Math.floor((diff%(1000*60*60))/(1000*60)).toString().padStart(2,'0');
+  const seconds=Math.floor((diff%(1000*60))/1000).toString().padStart(2,'0');
+  document.getElementById('days').innerText=days;
+  document.getElementById('hours').innerText=hours;
+  document.getElementById('minutes').innerText=minutes;
+  document.getElementById('seconds').innerText=seconds;
+}
+setInterval(countdown,1000);
+countdown();
+</script>
+</body>
+</html>
