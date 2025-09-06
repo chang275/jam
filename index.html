@@ -1,367 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jamaica 2025 - The Journey Awaits</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<style>
-/* ---------- RESET & ROOT ---------- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-    --bg-primary: #121212;
-    --bg-secondary: #1E1E1E;
-    --text-primary: #FFFFFF;
-    --text-secondary: #b0b0b0;
-    --jamaican-gold: #F9A825;
-    --deep-emerald: #005B41;
-    --shadow: 0 25px 50px rgba(0,0,0,0.3);
-    --shadow-light: 0 10px 25px rgba(0,0,0,0.2);
-}
-html { scroll-behavior: smooth; }
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.8;
-    color: var(--text-primary);
-    background: var(--bg-primary);
-    overflow-x: hidden;
-    cursor: none;
-}
-.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamaica 2025 - The Journey Awaits</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1E1E1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #b0b0b0;
+            --jamaican-gold: #F9A825;
+            --deep-emerald: #005B41;
+            --shadow: 0 25px 50px rgba(0,0,0,0.3);
+            --shadow-light: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 
-/* ---------- CURSOR ---------- */
-.cursor-dot {
-    width: 8px; height: 8px; background-color: var(--jamaican-gold);
-    position: fixed; border-radius: 50%; transform: translate(-50%, -50%);
-    pointer-events: none; z-index: 9999; transition: transform 0.2s ease-out;
-}
-.cursor-outline {
-    width: 40px; height: 40px; border: 2px solid var(--jamaican-gold);
-    position: fixed; border-radius: 50%; transform: translate(-50%, -50%);
-    pointer-events: none; z-index: 9999; transition: all 0.2s ease-out;
-}
-a:hover ~ .cursor-outline, button:hover ~ .cursor-outline, .day-item:hover ~ .cursor-outline, .modal-nav:hover ~ .cursor-outline, .adventure-card:hover ~ .cursor-outline { transform: translate(-50%, -50%) scale(1.5); }
+        .cursor-dot {
+            width: 8px; height: 8px; background-color: var(--jamaican-gold);
+            position: fixed; border-radius: 50%; transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 9999; transition: transform 0.2s ease-out;
+        }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 2px solid var(--jamaican-gold);
+            position: fixed; border-radius: 50%; transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 9999; transition: all 0.2s ease-out;
+        }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline, .day-item:hover ~ .cursor-outline, .modal-nav:hover ~ .cursor-outline, .adventure-card:hover ~ .cursor-outline { transform: translate(-50%, -50%) scale(1.5); }
+        
+        .hero {
+            height: 100vh; position: relative; display: flex;
+            align-items: center; justify-content: center; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
+            background: url('https://images.unsplash.com/photo-1517495306984-f84210c9c24a?q=80&w=2070&auto=format&fit=crop') center/cover;
+            animation: kenBurns 30s ease-in-out infinite alternate; z-index: -2;
+        }
+        @keyframes kenBurns {
+            from { transform: scale(1) translate(0, 0); }
+            to { transform: scale(1.1) translate(-2%, 2%); }
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%); z-index: -1;
+        }
+        .hero-content {
+            text-align: center; z-index: 2; color: white;
+            text-shadow: 0 8px 32px rgba(0,0,0,0.6); max-width: 900px;
+        }
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 18vw, 15rem);
+            letter-spacing: 0.15em; margin: 0; animation: fadeInUp 1.5s ease-out; line-height: 1;
+        }
+        .hero .subtitle {
+            font-size: 1.5rem; font-weight: 300; margin-bottom: 3rem;
+            animation: fadeInUp 1.5s ease-out 0.3s both; letter-spacing: 2px; text-transform: uppercase;
+        }
+        .countdown {
+            background: rgba(0,0,0,0.3); backdrop-filter: blur(15px); padding: 2rem;
+            border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
+            animation: fadeInUp 1.5s ease-out 0.6s both; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .countdown-timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .countdown-item { text-align: center; }
+        .countdown-number {
+            font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; display: block;
+            color: var(--jamaican-gold); text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .countdown-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
-/* ---------- HERO ---------- */
-.hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.hero-bg {
-    position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
-    background: url('https://images.unsplash.com/photo-1517495306984-f84210c9c24a?q=80&w=2070&auto=format&fit=crop') center/cover;
-    animation: kenBurns 30s ease-in-out infinite alternate; z-index: -2;
-}
-@keyframes kenBurns { from { transform: scale(1) translate(0,0);} to {transform: scale(1.1) translate(-2%,2%);} }
-.hero-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%); z-index: -1;
-}
-.hero-content { text-align: center; z-index: 2; color: white; text-shadow: 0 8px 32px rgba(0,0,0,0.6); max-width: 900px; }
-.hero h1 {
-    font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 18vw, 15rem);
-    letter-spacing: 0.15em; margin: 0; animation: fadeInUp 1.5s ease-out; line-height: 1;
-}
-.hero .subtitle {
-    font-size: 1.5rem; font-weight: 300; margin-bottom: 3rem;
-    animation: fadeInUp 1.5s ease-out 0.3s both; letter-spacing: 2px; text-transform: uppercase;
-}
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ---------- COUNTDOWN ---------- */
-.countdown {
-    background: rgba(0,0,0,0.3); backdrop-filter: blur(15px); padding: 2rem;
-    border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
-    animation: fadeInUp 1.5s ease-out 0.6s both; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-.countdown-timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-.countdown-item { text-align: center; }
-.countdown-number { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; display: block; color: var(--jamaican-gold); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-.countdown-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(18,18,18,0.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1); z-index: 1000;
+            transform: translateY(-100%); transition: transform 0.4s ease-out;
+        }
+        nav.visible { transform: translateY(0); }
+        nav .container { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
+            color: var(--jamaican-gold); text-decoration: none; letter-spacing: 0.1em;
+        }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 1rem; position: relative; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--jamaican-gold); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--jamaican-gold); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
 
-/* ---------- NAVBAR ---------- */
-nav {
-    position: fixed; top: 0; width: 100%;
-    background: rgba(18,18,18,0.8); backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.1); z-index: 1000;
-    transform: translateY(-100%); transition: transform 0.4s ease-out;
-}
-nav.visible { transform: translateY(0); }
-nav .container { display: flex; justify-content: space-between; align-items: center; height: 70px; }
-.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--jamaican-gold); text-decoration: none; letter-spacing: 0.1em; }
-.nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 1rem; position: relative; transition: color 0.3s ease; }
-.nav-links a:hover { color: var(--jamaican-gold); }
-.nav-links a::after {
-    content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
-    background: var(--jamaican-gold); transition: width 0.3s ease;
-}
-.nav-links a:hover::after { width: 100%; }
+        section { padding: 8rem 0; }
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif; font-size: 4rem; text-align: center;
+            margin-bottom: 1.5rem; color: var(--text-primary); letter-spacing: 0.05em;
+        }
+        .section-subtitle {
+            text-align: center; font-size: 1.2rem; color: var(--text-secondary);
+            max-width: 600px; margin: 0 auto 5rem; font-weight: 300;
+        }
 
-/* ---------- SECTIONS ---------- */
-section { padding: 8rem 0; }
-.section-title {
-    font-family: 'Bebas Neue', sans-serif; font-size: 4rem; text-align: center;
-    margin-bottom: 1.5rem; color: var(--text-primary); letter-spacing: 0.05em;
-}
-.section-subtitle { text-align: center; font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 5rem; font-weight: 300; }
+        .itinerary-list { max-width: 900px; margin: 0 auto; }
+        .day-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 2rem; border-bottom: 1px solid #333; cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .day-item:hover { background-color: var(--bg-secondary); }
+        .day-info { display: flex; align-items: center; gap: 2rem; }
+        .day-number { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--deep-emerald); }
+        .day-title { font-size: 1.5rem; font-weight: 500; }
+        .day-vibe { font-size: 1rem; color: var(--text-secondary); }
+        .day-item i { font-size: 1.5rem; color: var(--jamaican-gold); }
+        .day-date { font-weight: 600; color: var(--jamaican-gold); margin-left: auto; margin-right: 2rem; }
 
-/* ---------- ITINERARY ---------- */
-.itinerary-list { max-width: 900px; margin: 0 auto; }
-.day-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 2rem; border-bottom: 1px solid #333; cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.day-item:hover { background-color: var(--bg-secondary); }
-.day-info { display: flex; align-items: center; gap: 2rem; }
-.day-number { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--deep-emerald); }
-.day-title { font-size: 1.5rem; font-weight: 500; }
-.day-vibe { font-size: 1rem; color: var(--text-secondary); }
-.day-item i { font-size: 1.5rem; color: var(--jamaican-gold); }
-.day-date { font-weight: 600; color: var(--jamaican-gold); margin-left: auto; margin-right: 2rem; }
+        .details-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            z-index: 2000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .details-modal.visible { opacity: 1; }
+        .details-modal-content {
+            background: var(--bg-secondary); border-radius: 20px;
+            width: 90%; max-width: 800px; height: 80vh; max-height: 600px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            box-shadow: var(--shadow); overflow: hidden;
+            transform: scale(0.95); transition: transform 0.4s ease-out;
+            position: relative;
+        }
+        .details-modal.visible .details-modal-content { transform: scale(1); }
+        .details-media-container { width: 100%; height: 100%; background-color: #000; }
+        .details-media-container iframe, .details-media-container img {
+            width: 100%; height: 100%; object-fit: cover; border: none;
+        }
+        .details-text { padding: 2.5rem; overflow-y: auto; }
+        .details-text h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--jamaican-gold); }
+        .details-text .modal-date { font-size: 1rem; color: var(--text-secondary); margin-top: -1rem; margin-bottom: 1rem; font-weight: 500;}
+        .details-text h4 { margin-top: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 0.5rem; }
+        .details-text ul { list-style: none; padding-left: 0; font-size: 0.95rem; color: var(--text-secondary); }
+        .details-text li { margin-bottom: 0.5rem; }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: white; cursor: pointer; z-index: 10; }
+        .modal-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 40px; height: 40px; background: rgba(0,0,0,0.5);
+            color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 1.5rem; cursor: pointer; transition: background-color 0.3s;
+            z-index: 10;
+        }
+        .modal-nav:hover { background: var(--jamaican-gold); color: #121212; }
+        #prevDay { left: 15px; }
+        #nextDay { right: 15px; }
+        .location-link { color: var(--jamaican-gold); text-decoration: none; font-weight: 600; transition: color 0.3s; }
+        .location-link:hover { color: var(--text-primary); }
+        .location-link i { font-size: 0.8em; margin-left: 0.3rem; }
+        
+        #checklist { background: var(--bg-secondary); }
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        .checklist-card {
+            background: var(--bg-primary); padding: 2.5rem; border-radius: 20px;
+            box-shadow: var(--shadow-light); border-top: 4px solid var(--deep-emerald);
+        }
+        .checklist-card h3 {
+            font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-primary);
+            font-weight: 600; display: flex; align-items: center; gap: 1rem;
+        }
+        .checklist-card h3 i { color: var(--jamaican-gold); }
+        .checklist-card ul { list-style: none; padding-left: 0; }
+        .checklist-card li { margin-bottom: 1rem; color: var(--text-secondary); display: flex; align-items: center; gap: 1rem;}
+        .checklist-card li i { color: var(--deep-emerald); }
+        
+        .adventure-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;
+        }
+        .adventure-card {
+            background-size: cover; background-position: center; border-radius: 20px;
+            overflow: hidden; transition: all 0.4s ease; min-height: 400px;
+            position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 2rem; box-shadow: var(--shadow-light);
+        }
+        .adventure-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%);
+        }
+        .adventure-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: var(--shadow); }
+        .adventure-content { position: relative; z-index: 2; }
+        .adventure-content h3 { font-size: 1.8rem; margin-bottom: 0.5rem; line-height: 1.2; }
+        .adventure-content p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        .adventure-link { display: inline-block; text-decoration: none; color: var(--jamaican-gold); font-weight: 600; }
+        .adventure-link i { margin-left: 0.3rem; }
 
-/* ---------- MODALS ---------- */
-.details-modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-    z-index: 2000; display: none; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity 0.4s ease;
-}
-.details-modal.visible { opacity: 1; }
-.details-modal-content {
-    background: var(--bg-secondary); border-radius: 20px;
-    width: 90%; max-width: 800px; height: 80vh; max-height: 600px;
-    display: grid; grid-template-columns: 1fr 1fr;
-    box-shadow: var(--shadow); overflow: hidden;
-    transform: scale(0.95); transition: transform 0.4s ease-out;
-    position: relative;
-}
-.details-modal.visible .details-modal-content { transform: scale(1); }
-.details-media-container { width: 100%; height: 100%; background-color: #000; }
-.details-media-container iframe, .details-media-container img { width: 100%; height: 100%; object-fit: cover; border: none; }
-.details-text { padding: 2.5rem; overflow-y: auto; }
-.details-text h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--jamaican-gold); }
-.details-text .modal-date { font-size: 1rem; color: var(--text-secondary); margin-top: -1rem; margin-bottom: 1rem; font-weight: 500;}
-.details-text h4 { margin-top: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 0.5rem; }
-.details-text ul { list-style: none; padding-left: 0; font-size: 0.95rem; color: var(--text-secondary); }
-.details-text li { margin-bottom: 0.5rem; }
-.close-modal { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: white; cursor: pointer; z-index: 10; }
-.modal-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; transition: background-color 0.3s; z-index: 10; }
-.modal-nav:hover { background: var(--jamaican-gold); color: #121212; }
-#prevDay { left: 10px; }
-#nextDay { right: 10px; }
+        .fade-in { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .fade-in.animate { opacity: 1; transform: translateY(0); }
+        .loading-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-primary); display: flex; align-items: center;
+            justify-content: center; z-index: 9999; transition: opacity 0.8s ease;
+        }
+        .loading-logo { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: white; animation: pulse 1.5s infinite ease-in-out; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        footer { background: #000; color: white; padding: 6rem 2rem 4rem; text-align: center; }
+        .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--jamaican-gold); margin-bottom: 1rem; }
+        .footer-text { opacity: 0.8; }
 
-/* ---------- PASSWORD MODAL ---------- */
-.password-modal { display: none; align-items: center; justify-content: center; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 3000; opacity: 0; transition: opacity 0.4s; }
-.password-modal.visible { display: flex; opacity: 1; }
-.password-modal-content { background: var(--bg-secondary); padding: 3rem; border-radius: 20px; max-width: 400px; width: 90%; text-align: center; box-shadow: var(--shadow); }
-.password-modal-content input { width: 100%; padding: 0.8rem 1rem; border-radius: 10px; border: none; margin-bottom: 1rem; font-size: 1rem; }
-.password-modal-content button { padding: 0.8rem 1.5rem; border: none; border-radius: 10px; background: var(--jamaican-gold); color: #121212; font-weight: bold; cursor: pointer; transition: 0.3s; }
-.password-modal-content button:hover { background: var(--deep-emerald); color: white; }
-
-/* ---------- LOADING ---------- */
-#loadingScreen { position: fixed; top:0; left:0; width:100%; height:100%; background:#121212; display:flex; align-items:center; justify-content:center; z-index:9999; transition: opacity 0.8s; }
-#loadingScreen h1 { font-family:'Bebas Neue'; font-size:4rem; color: var(--jamaican-gold); letter-spacing:0.1em; }
-
-/* ---------- ADVENTURES ---------- */
-.adventures { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 2rem; }
-.adventure-card { background: var(--bg-secondary); border-radius: 15px; overflow:hidden; box-shadow: var(--shadow-light); transition: transform 0.3s; cursor:pointer; }
-.adventure-card img { width:100%; height:180px; object-fit:cover; }
-.adventure-card-content { padding: 1.5rem; }
-.adventure-card h4 { margin-bottom: 0.5rem; font-size:1.2rem; color: var(--jamaican-gold); }
-.adventure-card p { font-size:0.95rem; color: var(--text-secondary); }
-.adventure-card:hover { transform: translateY(-10px); }
-</style>
+        @media (max-width: 768px) {
+            .details-modal-content { grid-template-columns: 1fr; height: 90vh; }
+            .details-media-container { height: 250px; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- CURSOR -->
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-<!-- LOADING SCREEN -->
-<div id="loadingScreen"><h1>Jamaica 2025</h1></div>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="container">
-    <a href="#" class="nav-logo">Jamaica 2025</a>
-    <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#countdownSection">Countdown</a></li>
-      <li><a href="#itinerary">Itinerary</a></li>
-      <li><a href="#adventures">Adventures</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <h1>Jamaica 2025</h1>
-    <p class="subtitle">The Adventure Awaits</p>
-  </div>
-</section>
-
-<!-- COUNTDOWN -->
-<section id="countdownSection" class="container">
-  <div class="countdown">
-    <div class="countdown-timer">
-      <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
-      <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hours</span></div>
-      <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Minutes</span></div>
-      <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Seconds</span></div>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">JAMAICA 2025</div>
     </div>
-  </div>
-</section>
 
-<!-- ITINERARY -->
-<section id="itinerary">
-  <h2 class="section-title">Itinerary</h2>
-  <p class="section-subtitle">Check out each day of our adventure</p>
-  <div class="itinerary-list"></div>
-</section>
+    <!-- Password Modal -->
+    <div id="passwordModal" class="details-modal">
+        <div class="details-modal-content" style="display:block; max-width: 500px; height: auto; text-align: center;">
+             <div class="details-text">
+                <h3>🎂 Special Day Access</h3>
+                <p>This day contains surprise elements. Please enter the password:</p>
+                <input type="password" id="passwordInput" placeholder="Password" style="width: 100%; padding: 1rem; border: 2px solid #333; border-radius: 10px; font-size: 1rem; margin: 1rem 0; background: var(--bg-primary); color: var(--text-primary);">
+                <button onclick="checkPassword()" style="background: var(--jamaican-gold); color: #101010; border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; cursor: pointer;">Unlock</button>
+                <button onclick="closePasswordModal()" style="background: #444; color: white; border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; cursor: pointer; margin-left: 1rem;">Close</button>
+            </div>
+        </div>
+    </div>
 
-<!-- ADVENTURES -->
-<section id="adventures">
-  <h2 class="section-title">Adventures</h2>
-  <p class="section-subtitle">Exciting things to do while in Jamaica</p>
-  <div class="adventures"></div>
-</section>
+    <!-- Details Modal Structure -->
+    <div id="detailsModal" class="details-modal">
+        <span class="close-modal" onclick="closeDetailsModal()">&times;</span>
+        <div id="prevDay" class="modal-nav"><i class="fas fa-chevron-left"></i></div>
+        <div id="nextDay" class="modal-nav"><i class="fas fa-chevron-right"></i></div>
+        <div class="details-modal-content">
+            <div id="modalMediaContainer" class="details-media-container"></div>
+            <div id="modalText" class="details-text"></div>
+        </div>
+    </div>
 
-<!-- DETAILS MODAL -->
-<div class="details-modal" id="detailsModal">
-  <div class="details-modal-content">
-    <div class="details-media-container" id="modalMediaContainer"></div>
-    <div class="details-text" id="modalText"></div>
-    <div class="modal-nav" id="prevDay"><i class="fas fa-chevron-left"></i></div>
-    <div class="modal-nav" id="nextDay"><i class="fas fa-chevron-right"></i></div>
-    <div class="close-modal" onclick="closeDetailsModal()">&times;</div>
-  </div>
-</div>
+    <nav id="navbar">
+        <div class="container">
+            <a href="#hero" class="nav-logo">Jamaica 2025</a>
+            <ul class="nav-links">
+                <li><a href="#itinerary">The Plan</a></li>
+                <li><a href="#checklist">Checklist</a></li>
+                <li><a href="#adventures">Adventures</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<!-- PASSWORD MODAL -->
-<div class="password-modal" id="passwordModal">
-  <div class="password-modal-content">
-    <h3>Enter Password</h3>
-    <input type="password" id="passwordInput" placeholder="Password">
-    <button onclick="checkPassword()">Unlock</button>
-  </div>
-</div>
+    <header class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Jamaica</h1>
+            <p class="subtitle">One Holiday. Endless Memories.</p>
+            <div class="countdown">
+                <div class="countdown-timer" id="countdown">
+                    <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hours</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Minutes</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Seconds</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<script>
-// ----- CURSOR -----
-const cursorDot = document.querySelector('.cursor-dot');
-const cursorOutline = document.querySelector('.cursor-outline');
-window.addEventListener('mousemove', e => {
-    cursorDot.style.left = `${e.clientX}px`;
-    cursorDot.style.top = `${e.clientY}px`;
-    cursorOutline.style.left = `${e.clientX}px`;
-    cursorOutline.style.top = `${e.clientY}px`;
-});
+    <main>
+        <section id="itinerary">
+            <div class="container fade-in">
+                <h2 class="section-title">The Master Plan</h2>
+                <p class="section-subtitle">11 days of pure paradise. Click each day to reveal the details.</p>
+                <div class="itinerary-list"></div>
+            </div>
+        </section>
 
-// ----- LOADING SCREEN -----
-window.addEventListener('load', () => {
-    document.getElementById('loadingScreen').style.opacity='0';
-    setTimeout(()=>document.getElementById('loadingScreen').style.display='none',800);
-});
+        <section id="checklist">
+            <div class="container fade-in">
+                <h2 class="section-title">The Ultimate Checklist</h2>
+                <p class="section-subtitle">Everything you need to pack for a perfect trip. Don't leave anything behind!</p>
+                <div class="checklist-grid">
+                    <div class="checklist-card">
+                        <h3><i class="fas fa-passport"></i> Essentials</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Passport (6+ months validity)</li>
+                            <li><i class="fas fa-check"></i> Flight Tickets / Boarding Passes</li>
+                            <li><i class="fas fa-check"></i> Travel Insurance</li>
+                            <li><i class="fas fa-check"></i> Hotel Confirmation</li>
+                            <li><i class="fas fa-check"></i> USD Cash for tips</li>
+                        </ul>
+                    </div>
+                    <div class="checklist-card">
+                        <h3><i class="fas fa-tshirt"></i> Clothing</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Light Daywear</li>
+                            <li><i class="fas fa-check"></i> Smart-Casual Evening Outfits</li>
+                            <li><i class="fas fa-check"></i> Swimwear (at least 2-3)</li>
+                            <li><i class="fas fa-check"></i> Beach Cover-ups</li>
+                            <li><i class="fas fa-check"></i> Light Sweater or Jacket</li>
+                        </ul>
+                    </div>
+                    <div class="checklist-card">
+                        <h3><i class="fas fa-medkit"></i> Health</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Prescription Medications</li>
+                            <li><i class="fas fa-check"></i> Basic First-Aid Kit</li>
+                            <li><i class="fas fa-check"></i> Insect Repellent (DEET)</li>
+                            <li><i class="fas fa-check"></i> After-sun Lotion</li>
+                            <li><i class="fas fa-check"></i> Reef-Safe Sunscreen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-// ----- NAVBAR -----
-const nav = document.getElementById('navbar');
-window.addEventListener('scroll',()=>nav.classList.toggle('visible',window.scrollY>50));
+        <section id="adventures">
+            <div class="container fade-in">
+                <h2 class="section-title">Nearby Adventures in Ocho Rios</h2>
+                <p class="section-subtitle">Inspiration for your free time. All these spots are close to our hotel.</p>
+                <div class="adventure-grid">
+                    <div class="adventure-card" style="background-image: url('https://images.unsplash.com/photo-1621522533864-4a44b35417be?q=80&w=800&auto=format&fit=crop');">
+                        <div class="adventure-content">
+                            <h3>Blue Hole & Secret Falls</h3>
+                            <p>Dive into stunning turquoise pools and explore hidden caves behind waterfalls.</p>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Blue+Hole+Ocho+Rios" target="_blank" class="adventure-link">View on Map <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="adventure-card" style="background-image: url('https://images.unsplash.com/photo-1598204285499-96d2a4034212?q=80&w=1974&auto=format&fit=crop');">
+                        <div class="adventure-content">
+                            <h3>Mystic Mountain</h3>
+                            <p>Ride a bobsled, zipline through the canopy, or enjoy the infinity pool with panoramic views.</p>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Mystic+Mountain+Ocho+Rios" target="_blank" class="adventure-link">View on Map <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                     <div class="adventure-card" style="background-image: url('https://images.unsplash.com/photo-1551890344-a69cf38c1055?q=80&w=800&auto=format&fit=crop');">
+                        <div class="adventure-content">
+                            <h3>Dolphin Cove</h3>
+                            <p>An amazing marine park where you can swim with dolphins and interact with stingrays.</p>
+                             <a href="https://www.google.com/maps/search/?api=1&query=Dolphin+Cove+Ocho+Rios" target="_blank" class="adventure-link">View on Map <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="adventure-card" style="background-image: url('https://images.unsplash.com/photo-1610948237937-0ea34145b452?q=80&w=800&auto=format&fit=crop');">
+                        <div class="adventure-content">
+                            <h3>White River Rafting</h3>
+                            <p>Relax and float down the gentle currents of a crystal-clear river on a bamboo raft.</p>
+                            <a href="https://www.google.com/maps/search/?api=1&query=White+River+Valley+Jamaica" target="_blank" class="adventure-link">View on Map <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                     <div class="adventure-card" style="background-image: url('https://images.unsplash.com/photo-1574482943249-35a115849547?q=80&w=800&auto=format&fit=crop');">
+                        <div class="adventure-content">
+                            <h3>Konoko Falls & Gardens</h3>
+                            <p>A lush botanical garden with beautiful waterfalls you can climb, plus a small zoo and museum.</p>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Konoko+Falls+%26+Park" target="_blank" class="adventure-link">View on Map <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="adventure-card" style="background-image: url('https://images.unsplash.com/photo-1599831023253-29dc37c5905a?q=80&w=800&auto=format&fit=crop');">
+                        <div class="adventure-content">
+                            <h3>Explore Ochi Town</h3>
+                            <p>Discover the vibrant heart of Ocho Rios. Visit the craft markets and try authentic local food.</p>
+                             <a href="https://www.google.com/maps/search/?api=1&query=Ocho+Rios+Craft+Market" target="_blank" class="adventure-link">View on Map <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Jamaica 2025</div>
+            <p class="footer-text">One Love, One Heart, One Unforgettable Journey.</p>
+        </div>
+    </footer>
 
-// ----- DAY DATA -----
-const dayData = {
-  day1: { title: "Arrival", date:"Nov 20", fullDate:"Nov 20, 2025", vibe:"Relaxing", image:"https://images.unsplash.com/photo-1517495306984-f84210c9c24a?q=80&w=800&auto=format&fit=crop" },
-  day2: { title: "Beach Day", date:"Nov 21", fullDate:"Nov 21, 2025", vibe:"Sunny", image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" },
-  day3: { title: "Rainforest Hike", date:"Nov 22", fullDate:"Nov 22, 2025", vibe:"Adventurous", image:"https://images.unsplash.com/photo-1516569422543-66fc775c3f9a?q=80&w=800&auto=format&fit=crop" },
-  day8: { title: "Surprise Birthday", date:"Nov 24", fullDate:"Nov 24, 2025", vibe:"Special", special:true, placeholder:"🎁 Surprise day! Enter password to unlock.", secret:"🥳 Happy Birthday! Enjoy your special surprise!", image:"https://images.unsplash.com/photo-1516715094481-0ef25c5c7a0a?q=80&w=800&auto=format&fit=crop" }
-};
+    <script>
+        // --- Cursor ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            cursorDot.style.left = `${clientX}px`; cursorDot.style.top = `${clientY}px`;
+            cursorOutline.style.left = `${clientX}px`; cursorOutline.style.top = `${clientY}px`;
+        });
 
-// ----- ITINERARY LIST -----
-const itineraryList = document.querySelector('.itinerary-list');
-Object.keys(dayData).forEach(key=>{
-  const day = dayData[key];
-  const div = document.createElement('div');
-  div.className='day-item';
-  div.onclick = ()=>openDetailsModal(key);
-  div.innerHTML=`<div class="day-info"><span class="day-number">${key.replace('day','').padStart(2,'0')}</span><div><div class="day-title">${day.title}</div><div class="day-vibe">${day.vibe}</div></div></div><div class="day-date">${day.date}</div><i class="fas ${day.special?'fa-lock':'fa-arrow-right'}"></i>`;
-  itineraryList.appendChild(div);
-});
+        const dayData = {
+            day1: { fullDate: 'Monday, Nov 24', date: 'Nov 24', title: 'Arrival & Welcome', vibe: 'The adventure begins', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>~19:30:</strong> Meet coach after customs.</li><li><strong>Travel Time:</strong> Approx. 1.5 hours.</li><li><strong>~21:30:</strong> Arrive at Riu Ocho Rios.</li></ul><h4><i class="fas fa-plane-arrival"></i> The Plan</h4><ul><li>Land at Montego Bay, clear customs, and take our private coach to Ocho Rios for check-in and a late buffet.</li></ul>`, locations: [{ name: 'Riu Ocho Rios', url: 'https://www.google.com/maps/search/?api=1&query=Riu+Ocho+Rios' }] },
+            day2: { fullDate: 'Tuesday, Nov 25', date: 'Nov 25', title: 'Resort Relaxation', vibe: 'Soak up the sun in Ocho Rios', image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios%20beach&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-umbrella-beach"></i> The Plan</h4><ul><li><strong>09:00:</strong> Group breakfast.</li><li><strong>All Day:</strong> Enjoy the resort! Lounge at the infinity pool, explore the beach, or book a spa treatment.</li><li><strong>17:00:</strong> Sunset cocktails on the terrace.</li></ul>` },
+            day3: { fullDate: 'Wednesday, Nov 26', date: 'Nov 26', title: 'Negril Adventure', vibe: 'Cliffs, beaches & lighthouses', video: 'https://www.youtube.com/embed/SIT-e_p74_A', mapUrl: 'https://maps.google.com/maps?q=Negril%20Jamaica&t=&z=13&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>07:30:</strong> Depart Riu Ocho Rios.</li><li><strong>Travel Time:</strong> Approx. 3 hours.</li><li><strong>18:30:</strong> Depart Negril.</li><li><strong>Arrival at Hotel:</strong> ~21:30.</li></ul><h4><i class="fas fa-sun"></i> The Plan</h4><ul><li>A full day trip to Negril to see 7 Mile Beach, visit the Lighthouse for photos, and watch the cliff divers at Rick’s Café at sunset.</li></ul><h4><i class="fas fa-gem"></i> Local Gems & Hotspots</h4><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Seven+Mile+Beach+Negril" target="_blank" class="location-link">Seven Mile Beach <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Negril+Lighthouse" target="_blank" class="location-link">Negril Lighthouse <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Rick's+Cafe+Jamaica" target="_blank" class="location-link">Rick's Café <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Booby+Cay+Island+Negril" target="_blank" class="location-link">Booby Cay Island <i class="fas fa-external-link-alt"></i></a> (Underrated Gem)</li></ul>` },
+            day4: { fullDate: 'Thursday, Nov 27', date: 'Nov 27', title: 'Dunn’s River Falls', vibe: 'Iconic waterfall climb', video: 'https://www.youtube.com/embed/kNrj_a4-e-E', mapUrl: 'https://maps.google.com/maps?q=Dunn%27s%20River%20Falls&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>09:00:</strong> Depart Riu Ocho Rios.</li><li><strong>Travel Time:</strong> Approx. 15 mins.</li><li><strong>~14:00:</strong> Return to hotel.</li></ul><h4><i class="fas fa-water"></i> The Plan</h4><ul><li>A morning excursion to climb the world-famous Dunn’s River Falls, followed by an afternoon of relaxation at the resort.</li></ul>`, locations: [{ name: 'Dunn\'s River Falls', url: 'https://www.google.com/maps/search/?api=1&query=Dunn\'s+River+Falls' }] },
+            day5: { fullDate: 'Friday, Nov 28', date: 'Nov 28', title: 'Cricket or Catamaran', vibe: 'Your choice: local sport or ocean bliss', image: 'https://images.unsplash.com/photo-1598852234320-a1f4a960a3d3?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Ocho%20Rios%20Bay%20Beach&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<p style="margin-bottom: 1.5rem;">Today splits into two amazing options! Choose your vibe:</p><h4><i class="fas fa-volleyball-ball"></i> Option 1: Community Cricket</h4><ul><li><strong>The Plan:</strong> Head to a local ground for a friendly match with local players. A truly authentic experience!</li><li><strong>Travel:</strong> 10:00 AM departure, short 15-min ride. Return to the hotel for lunch.</li><li><strong>The Look:</strong> Wear a <strong>Plain White Top</strong> for team photos!</li></ul><h4><i class="fas fa-ship"></i> Option 2: Relax & Catamaran</h4><ul><li><strong>The Plan:</strong> Enjoy a lazy morning at the resort. In the afternoon, we'll set sail on a catamaran cruise with music, drinks, and snorkeling.</li><li><strong>Travel:</strong> A short ride to the dock in the afternoon.</li></ul>`, locations: [{ name: 'Content Gardens Cricket Ground (Cricket)', url: 'https://www.google.com/maps/search/?api=1&query=Content+Gardens+Cricket+Ground' },{ name: 'Ocho Rios Cruise Port (Catamaran)', url: 'https://www.google.com/maps/search/?api=1&query=Ocho+Rios+Cruise+Port' }] },
+            day6: { fullDate: 'Saturday, Nov 29', date: 'Nov 29', title: 'Free Day', vibe: 'Your adventure, your choice', image: 'https://images.unsplash.com/photo-1542359649-31e03cdde627?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Kingston%20Jamaica&t=&z=13&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-map-signs"></i> The Plan</h4><p>A day to relax at the hotel or go on a bigger adventure! Here are two amazing day trip ideas:</p><h4>Trip Idea 1: Kingston Vibe</h4><p>Travel to the heart of Jamaica to explore its capital city.</p><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Bob+Marley+Museum" target="_blank" class="location-link">Bob Marley Museum <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Devon+House+Kingston" target="_blank" class="location-link">Devon House (for ice cream!) <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Port+Royal+Jamaica" target="_blank" class="location-link">Port Royal Historic Site <i class="fas fa-external-link-alt"></i></a> (Underrated Gem)</li></ul><h4>Trip Idea 2: Montego Bay Buzz</h4><p>Experience the energy of Jamaica's tourist capital.</p><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Hip+Strip+Montego+Bay" target="_blank" class="location-link">The Hip Strip <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Doctor's+Cave+Beach" target="_blank" class="location-link">Doctor's Cave Beach <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Rocklands+Bird+Sanctuary" target="_blank" class="location-link">Rocklands Bird Sanctuary <i class="fas fa-external-link-alt"></i></a> (Underrated Gem)</li></ul>` },
+            day7: { fullDate: 'Sunday, Nov 30', date: 'Nov 30', title: 'Portland Paradise', vibe: 'Discover hidden gems', video: 'https://www.youtube.com/embed/y-Ih1D2IgnY', mapUrl: 'https://maps.google.com/maps?q=Portland%20Parish%20Jamaica&t=&z=11&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>08:00:</strong> Depart Riu Ocho Rios.</li><li><strong>Travel Time:</strong> Approx. 2 hours.</li><li><strong>17:00:</strong> Depart Portland.</li><li><strong>Arrival at Hotel:</strong> ~19:00.</li></ul><h4><i class="fas fa-tint"></i> The Plan</h4><ul><li>A full day trip to the lush parish of Portland to visit the stunning Blue Lagoon and relax at the authentic Winifred Beach.</li></ul><h4><i class="fas fa-gem"></i> Local Gems & Hotspots</h4><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Blue+Lagoon+Jamaica" target="_blank" class="location-link">The Blue Lagoon <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Winifred+Beach+Jamaica" target="_blank" class="location-link">Winifred Beach <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Boston+Bay+Jamaica" target="_blank" class="location-link">Boston Bay (for Jerk) <i class="fas fa-external-link-alt"></i></a> (Underrated Gem)</li></ul>` },
+            day8: { fullDate: 'Monday, Dec 01', date: 'Dec 01', title: 'A Day of Surprises', vibe: 'The main event in Ocho Rios', special: true, image: 'https://images.unsplash.com/photo-1600449552837-51da4a034503?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios%20beach%20dining&t=&z=15&ie=UTF8&iwloc=&output=embed', placeholder: `<h4><i class="fas fa-gift"></i> A Special Celebration</h4><p>Today is a day for surprises and creating special memories together. The full plan will be revealed on the day!</p>`, secret: `<h4><i class="fas fa-gift"></i> The Secret Plan</h4><ul><li><strong>Afternoon:</strong> Surprise group photo with our "Special Celebration Tops"!</li><li><strong>Evening:</strong> We'll have a special birthday dinner celebration! The plan is flexible—it could be a private beach dinner at the resort or a fabulous dinner out. We'll decide closer to the time!</li><li><strong>Mission:</strong> Keep it 100% secret from Sue!</li></ul>` },
+            day9: { fullDate: 'Tuesday, Dec 02', date: 'Dec 02', title: 'Resort Chill', vibe: 'Relax and recharge in Ocho Rios', image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios%20spa&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-cocktail"></i> The Plan</h4><ul><li>A final full day to enjoy the resort's pools, beaches, and bars right here in Ocho Rios.</li></ul>` },
+            day10: { fullDate: 'Wednesday, Dec 03', date: 'Dec 03', title: 'Farewell Dinner', vibe: 'One last memory in Ocho Rios', image: 'https://images.unsplash.com/photo-1519690889973-3d7d4b2a7f29?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=restaurants%20near%20Riu%20Ocho%20Rios&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-glass-cheers"></i> The Plan</h4><ul><li><strong>Evening:</strong> One last group dinner together at a specialty restaurant at our hotel.</li></ul><h4><i class="fas fa-tshirt"></i> The Look</h4><ul><li>Wear something <strong>Tropical & Bright</strong> for our farewell photos.</li></ul>` },
+            day11: { fullDate: 'Thursday, Dec 04', date: 'Dec 04', title: 'Departure Day', vibe: 'Homeward bound', image: 'https://images.unsplash.com/photo-1571283738545-2c892b157a53?q=80&w=800&auto=format&fit=crop', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>~12:00:</strong> Coach departs for Montego Bay Airport.</li><li><strong>Travel Time:</strong> Approx. 1.5 hours.</li></ul><h4><i class="fas fa-plane-departure"></i> The Plan</h4><ul><li>Enjoy a final Jamaican breakfast before our afternoon departure for the airport.</li></ul>` }
+        };
+        
+        const dayKeys = Object.keys(dayData);
+        const itineraryList = document.querySelector('.itinerary-list');
+        dayKeys.forEach(dayKey => {
+            const day = dayData[dayKey];
+            const dayItem = document.createElement('div');
+            dayItem.className = 'day-item';
+            dayItem.onclick = () => openDetailsModal(dayKey);
+            dayItem.innerHTML = `<div class="day-info"><span class="day-number">${dayKey.replace('day', '').padStart(2, '0')}</span><div><div class="day-title">${day.title}</div><div class="day-vibe">${day.vibe}</div></div></div><div class="day-date">${day.date}</div><i class="fas ${day.special ? 'fa-lock' : 'fa-arrow-right'}"></i>`;
+            itineraryList.appendChild(dayItem);
+        });
 
-// ----- MODAL LOGIC -----
-const detailsModal = document.getElementById('detailsModal');
-const mediaContainer = document.getElementById('modalMediaContainer');
-const modalText = document.getElementById('modalText');
-const passwordModal = document.getElementById('passwordModal');
-const prevDayButton = document.getElementById('prevDay');
-const nextDayButton = document.getElementById('nextDay');
-let currentDayIndex = 0;
-let isSpecialDayUnlocked = false;
-const dayKeys = Object.keys(dayData);
+        const detailsModal = document.getElementById('detailsModal');
+        const mediaContainer = document.getElementById('modalMediaContainer');
+        const modalText = document.getElementById('modalText');
+        const passwordModal = document.getElementById('passwordModal');
+        const prevDayButton = document.getElementById('prevDay');
+        const nextDayButton = document.getElementById('nextDay');
+        
+        let currentDayIndex = 0;
+        let isSpecialDayUnlocked = false;
 
-function openDetailsModal(dayKey, fromNav=false){
-  currentDayIndex = dayKeys.indexOf(dayKey);
-  const data = dayData[dayKey];
-  if(data.special && !isSpecialDayUnlocked && !fromNav){
-    passwordModal.style.display='flex';
-    setTimeout(()=>passwordModal.classList.add('visible'),10);
-    return;
-  }
-  if(data.image) mediaContainer.innerHTML=`<img src="${data.image}" alt="${data.title}">`;
-  let html=`<h3>${data.title}</h3><div class="modal-date">${data.fullDate}</div>`;
-  if(data.special && isSpecialDayUnlocked) html+=data.secret;
-  else html+=data.placeholder||"";
-  modalText.innerHTML=html;
-  detailsModal.style.display='flex';
-  setTimeout(()=>detailsModal.classList.add('visible'),10);
-  updateNavButtons();
-}
+        function openDetailsModal(dayKey, fromNav = false) {
+            currentDayIndex = dayKeys.indexOf(dayKey);
+            const data = dayData[dayKey];
 
-function closeDetailsModal(){
-  detailsModal.classList.remove('visible');
-  setTimeout(()=>{detailsModal.style.display='none'; mediaContainer.innerHTML='';},400);
-}
+            if (data.special && !isSpecialDayUnlocked && !fromNav) {
+                passwordModal.style.display = 'flex';
+                setTimeout(() => passwordModal.classList.add('visible'), 10);
+                return;
+            }
+            
+            if (data.video) {
+                mediaContainer.innerHTML = `<iframe src="${data.video}?autoplay=1&mute=1&loop=1&playlist=${data.video.split('/').pop()}&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            } else {
+                mediaContainer.innerHTML = `<img src="${data.image}" alt="Activity image" onerror="this.parentElement.innerHTML = \`<iframe src='${data.mapUrl}' style='width:100%; height:100%; border:0;' allowfullscreen='' loading='lazy'></iframe>\`">`;
+            }
 
-function checkPassword(){
-  if(document.getElementById('passwordInput').value.toLowerCase()==='sue'){
-    isSpecialDayUnlocked=true;
-    passwordModal.classList.remove('visible');
-    setTimeout(()=>passwordModal.style.display='none',400);
-    openDetailsModal(dayKeys[currentDayIndex],true);
-  }else alert('Incorrect password!');
-}
+            let contentHTML = `<h3>${data.title}</h3><div class="modal-date">${data.fullDate}</div>${data.special && isSpecialDayUnlocked ? data.secret : (data.placeholder || data.content)}`;
+            if (data.locations && data.locations.length > 0) {
+                contentHTML += `<h4><i class="fas fa-map-marker-alt"></i> Locations</h4><ul>`;
+                data.locations.forEach(loc => { contentHTML += `<li><a href="${loc.url}" target="_blank" class="location-link">${loc.name} <i class="fas fa-external-link-alt"></i></a></li>`; });
+                contentHTML += `</ul>`;
+            }
+            modalText.innerHTML = contentHTML;
+            detailsModal.style.display = 'flex';
+            setTimeout(() => detailsModal.classList.add('visible'), 10);
 
-function updateNavButtons(){
-  let prevIndex=currentDayIndex-1;
-  while(prevIndex>=0 && dayData[dayKeys[prevIndex]].special && !isSpecialDayUnlocked) prevIndex--;
-  prevDayButton.style.display=prevIndex<0?'none':'flex';
-  let nextIndex=currentDayIndex+1;
-  while(nextIndex<dayKeys.length && dayData[dayKeys[nextIndex]].special && !isSpecialDayUnlocked) nextIndex++;
-  nextDayButton.style.display=nextIndex>=dayKeys.length?'none':'flex';
-}
+            updateNavButtons();
+        }
 
-prevDayButton.onclick=()=>{let i=currentDayIndex-1; while(i>=0 && dayData[dayKeys[i]].special && !isSpecialDayUnlocked)i--; if(i>=0) openDetailsModal(dayKeys[i],true);}
-nextDayButton.onclick=()=>{let i=currentDayIndex+1; while(i<dayKeys.length && dayData[dayKeys[i]].special && !isSpecialDayUnlocked)i++; if(i<dayKeys.length) openDetailsModal(dayKeys[i],true);}
+        function updateNavButtons() {
+            let prevIndex = currentDayIndex - 1;
+            if (dayData[dayKeys[prevIndex]]?.special && !isSpecialDayUnlocked) {
+                prevIndex--;
+            }
+            prevDayButton.style.display = prevIndex < 0 ? 'none' : 'flex';
+            
+            let nextIndex = currentDayIndex + 1;
+            if (dayData[dayKeys[nextIndex]]?.special && !isSpecialDayUnlocked) {
+                nextIndex++;
+            }
+            nextDayButton.style.display = nextIndex >= dayKeys.length ? 'none' : 'flex';
+        }
 
-// ----- COUNTDOWN -----
-function countdown(){
-  const target=new Date('2025-11-20T00:00:00');
-  const now=new Date();
-  const diff=target-now;
-  if(diff<=0){document.getElementById('days').innerText='00'; document.getElementById('hours').innerText='00'; document.getElementById('minutes').innerText='00'; document.getElementById('seconds').innerText='00'; return;}
-  const days=Math.floor(diff/(1000*60*60*24)).toString().padStart(2,'0');
-  const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60)).toString().padStart(2,'0');
-  const minutes=Math.floor((diff%(1000*60*60))/(1000*60)).toString().padStart(2,'0');
-  const seconds=Math.floor((diff%(1000*60))/1000).toString().padStart(2,'0');
-  document.getElementById('days').innerText=days;
-  document.getElementById('hours').innerText=hours;
-  document.getElementById('minutes').innerText=minutes;
-  document.getElementById('seconds').innerText=seconds;
-}
-setInterval(countdown,1000);
-countdown();
-</script>
+        prevDayButton.onclick = () => { 
+            let prevIndex = currentDayIndex - 1;
+            if (dayData[dayKeys[prevIndex]]?.special && !isSpecialDayUnlocked) {
+                prevIndex--;
+            }
+            if(prevIndex >= 0) openDetailsModal(dayKeys[prevIndex], true); 
+        };
+        nextDayButton.onclick = () => {
+             let nextIndex = currentDayIndex + 1;
+            if (dayData[dayKeys[nextIndex]]?.special && !isSpecialDayUnlocked) {
+                nextIndex++;
+            }
+            if(nextIndex < dayKeys.length) openDetailsModal(dayKeys[nextIndex], true);
+        };
+
+        function closeDetailsModal() {
+            detailsModal.classList.remove('visible');
+            setTimeout(() => {
+                detailsModal.style.display = 'none';
+                mediaContainer.innerHTML = '';
+            }, 400);
+        }
+
+        function closePasswordModal() {
+            passwordModal.classList.remove('visible');
+            setTimeout(() => passwordModal.style.display = 'none', 400);
+        }
+        
+        function checkPassword() {
+            if (document.getElementById('passwordInput').value.toLowerCase() === 'sue') {
+                isSpecialDayUnlocked = true;
+                closePasswordModal();
+                openDetailsModal(dayKeys[currentDayIndex], true);
+            } else {
+                alert('Incorrect password. Hint: It\'s the birthday girl\'s name!');
+            }
+        }
+
+        window.addEventListener('load', () => {
+            document.getElementById('loadingScreen').style.opacity = '0';
+            setTimeout(() => document.getElementById('loadingScreen').style.display = 'none', 800);
+        });
+        const countdown = () => {
+            const target = new Date('2025-11-24T00:00:00');
+            const diff = target - new Date();
+            if (diff <= 0) { document.getElementById('countdown').innerHTML = "The Adventure Has Begun!"; return; }
+            document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24)).toString().padStart(2, '0');
+            document.getElementById('hours').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60)).toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = Math.floor((diff % (1000*60*60)) / (1000*60)).toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = Math.floor((diff % (1000*60)) / 1000).toString().padStart(2, '0');
+        };
+        setInterval(countdown, 1000);
+        countdown();
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => { window.scrollY > 50 ? nav.classList.add('visible') : nav.classList.remove('visible'); });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('animate'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
+
