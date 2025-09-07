@@ -25,21 +25,8 @@
             color: var(--text-primary);
             background: var(--bg-primary);
             overflow-x: hidden;
-            cursor: none;
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-
-        .cursor-dot {
-            width: 8px; height: 8px; background-color: var(--jamaican-gold);
-            position: fixed; border-radius: 50%; transform: translate(-50%, -50%);
-            pointer-events: none; z-index: 9999; transition: transform 0.2s ease-out;
-        }
-        .cursor-outline {
-            width: 40px; height: 40px; border: 2px solid var(--jamaican-gold);
-            position: fixed; border-radius: 50%; transform: translate(-50%, -50%);
-            pointer-events: none; z-index: 9999; transition: all 0.2s ease-out;
-        }
-        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline, .day-item:hover ~ .cursor-outline, .modal-nav:hover ~ .cursor-outline, .filter-chip:hover ~ .cursor-outline { transform: translate(-50%, -50%) scale(1.5); }
         
         .hero {
             height: 100vh; position: relative; display: flex;
@@ -127,11 +114,12 @@
         .day-item:hover { background-color: var(--bg-secondary); }
         .day-info { display: flex; align-items: center; gap: 2rem; }
         .day-number { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--deep-emerald); }
+        .day-title-container { display: flex; flex-direction: column; }
         .day-title { font-size: 1.5rem; font-weight: 500; }
+        .day-date-inline { font-weight: 600; color: var(--jamaican-gold); font-size: 0.9rem; margin-top: -5px; }
         .day-vibe { font-size: 1rem; color: var(--text-secondary); }
         .day-item i { font-size: 1.5rem; color: var(--jamaican-gold); }
-        .day-date { font-weight: 600; color: var(--jamaican-gold); margin-left: auto; margin-right: 2rem; }
-
+        
         .details-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
@@ -200,46 +188,14 @@
         .checklist-card li { margin-bottom: 1rem; color: var(--text-secondary); display: flex; align-items: center; gap: 1rem;}
         .checklist-card li i { color: var(--deep-emerald); }
         
-        .filter-container { text-align: center; margin-bottom: 3rem; }
-        .filter-group { margin-bottom: 1.5rem; }
-        .filter-group h4 { font-size: 1rem; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 2px; margin-bottom: 1rem; }
-        .filter-chip {
-            display: inline-block; padding: 0.5rem 1.2rem; margin: 0.25rem;
-            background: var(--bg-secondary); border: 1px solid #444;
-            border-radius: 50px; cursor: pointer; transition: all 0.3s ease;
+        .cta-button {
+            display: inline-flex; align-items: center; gap: 1rem;
+            background: var(--jamaican-gold); color: #101010;
+            padding: 1.2rem 2.5rem; border-radius: 50px; text-decoration: none;
+            font-weight: 600; font-size: 1.1rem; margin-top: 2rem;
+            transition: all 0.3s ease; box-shadow: var(--shadow-light);
         }
-        .filter-chip.active { background: var(--jamaican-gold); color: #121212; border-color: var(--jamaican-gold); font-weight: 600; }
-        
-        .experience-card {
-            background: var(--bg-secondary); border-radius: 15px;
-            padding: 1.5rem; margin-bottom: 1rem;
-            display: grid; grid-template-columns: 2fr auto;
-            gap: 1.5rem; align-items: center;
-            transition: background-color 0.3s ease;
-        }
-        .experience-card:hover { background-color: #2a2a2a; }
-        .experience-info .name { font-weight: 600; font-size: 1.1rem; }
-        .experience-info .summary { color: var(--text-secondary); font-size: 0.9rem; }
-        .experience-tags { text-align: right; }
-        .experience-tags span, .experience-tags a {
-            display: inline-block; font-size: 0.8rem;
-            padding: 0.4rem 0.9rem; border-radius: 50px;
-            margin-top: 0.5rem; margin-left: 0.5rem;
-            text-decoration: none;
-        }
-        .tag-region { background: var(--deep-emerald); color: white; }
-        .tag-category { background-color: #333; color: var(--text-secondary); }
-        .tag-time, .tag-cost { background-color: #444; color: var(--text-secondary); }
-        
-        .pagination-container { text-align: center; margin-top: 3rem; display: flex; justify-content: center; align-items: center; gap: 1rem;}
-        .pagination-button {
-            background: var(--bg-secondary); color: var(--text-primary);
-            border: 1px solid #444; padding: 0.8rem 1.2rem;
-            margin: 0 0.2rem; border-radius: 10px; cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .pagination-button:hover, .pagination-button.active { background: var(--jamaican-gold); color: #121212; border-color: var(--jamaican-gold); }
-        .pagination-button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .cta-button:hover { transform: scale(1.05); box-shadow: var(--shadow); }
 
         .fade-in { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .fade-in.animate { opacity: 1; transform: translateY(0); }
@@ -256,18 +212,26 @@
         .footer-text { max-width: 600px; margin: 0 auto; line-height: 1.6; font-size: 0.9rem; }
         
         @media (max-width: 768px) {
+            body { cursor: auto; }
+            .container { padding: 0 1rem; }
+            .hero-content { padding: 0.5rem; }
+            .countdown { padding: 1.5rem; }
+            .countdown-timer { gap: 1rem; }
+            .nav-links { display: none; }
+            section { padding: 6rem 1rem; }
+            .section-title { font-size: 3rem; }
+            .day-item { padding: 1.5rem; }
+            .day-title { font-size: 1.2rem; }
+            .day-info { flex-wrap: wrap; }
+            .day-date { display: none; }
             .details-modal-content { grid-template-columns: 1fr; height: 90vh; }
             .details-media-container { height: 250px; }
-            .nav-links { display: none; }
-            .experience-card { grid-template-columns: 1fr; text-align: center; }
-            .experience-tags { text-align: center; margin-top: 1rem; }
+            .details-text { padding: 1.5rem; }
+            .modal-nav { width: 35px; height: 35px; font-size: 1.2rem;}
         }
     </style>
 </head>
 <body>
-
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
 
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-logo">JAMAICA 2025</div>
@@ -302,8 +266,9 @@
             <a href="#hero" class="nav-logo">Jamaica 2025</a>
             <ul class="nav-links">
                 <li><a href="#itinerary">The Plan</a></li>
-                <li><a href="#checklist">Checklist</a></li>
                 <li><a href="#adventures">Adventures</a></li>
+                <li><a href="#memories">Memories</a></li>
+                <li><a href="#checklist">Checklist</a></li>
             </ul>
         </div>
     </nav>
@@ -328,9 +293,29 @@
     <main>
         <section id="itinerary">
             <div class="container fade-in">
-                <h2 class="section-title">The Master Plan</h2>
-                <p class="section-subtitle">Our hand-crafted plan for 11 days of pure paradise. Click on a day to see what we've got in store!</p>
+                <h2 class="section-title">Vibes Guide</h2>
+                <p class="section-subtitle">We’ve crafted 11 days of island bliss. Click a day to discover the vibes in store.</p>
                 <div class="itinerary-list"></div>
+            </div>
+        </section>
+
+        <section id="adventures">
+            <div class="container fade-in" style="text-align: center;">
+                <h2 class="section-title">Explore Ocho Rios</h2>
+                <p class="section-subtitle">Looking for inspiration for our free days? Click the link below to see all the top-rated attractions, tours, and hidden gems right on our doorstep. Let's find our next adventure!</p>
+                <a href="https://www.tripadvisor.co.uk/Attractions-g147312-Activities-oa0-Ocho_Rios_Saint_Ann_Parish_Jamaica.html" target="_blank" class="cta-button">
+                    <i class="fas fa-map-signs"></i> Explore on TripAdvisor
+                </a>
+            </div>
+        </section>
+        
+        <section id="memories">
+            <div class="container fade-in" style="text-align: center;">
+                <h2 class="section-title">Shared Memories</h2>
+                <p class="section-subtitle">This is where our Jamaica story will live on. After the trip, let's all upload our favourite photos and videos to create our shared album of pure joy.</p>
+                <a href="https://drive.google.com/drive/folders/1kcDRcoA_UVaxlqwoy7Pwy99Yu5-gePSg?usp=drive_link" target="_blank" class="cta-button">
+                    <i class="fas fa-camera"></i> Access Our Memory Vault
+                </a>
             </div>
         </section>
 
@@ -372,36 +357,6 @@
                 </div>
             </div>
         </section>
-
-        <section id="adventures">
-            <div class="container fade-in">
-                <h2 class="section-title">Jamaica Experiences</h2>
-                <p class="section-subtitle">Looking for inspiration? Filter through some of the island's best spots to find your perfect adventure.</p>
-                
-                <div class="filter-container">
-                    <div class="filter-group">
-                        <h4>Filter by Region</h4>
-                        <div id="region-filters"></div>
-                    </div>
-                     <div class="filter-group">
-                        <h4>Filter by Drive Time from Ocho Rios</h4>
-                        <div id="time-filters"></div>
-                    </div>
-                    <div class="filter-group">
-                        <h4>Filter by Activity Type</h4>
-                        <div id="category-filters"></div>
-                    </div>
-                </div>
-
-                <div id="experience-cards-container">
-                    <!-- Experience cards will be populated by JavaScript -->
-                </div>
-
-                <div id="pagination-container" class="pagination-container">
-                    <!-- Pagination buttons will be populated by JavaScript -->
-                </div>
-            </div>
-        </section>
     </main>
     
     <footer>
@@ -414,152 +369,20 @@
     </footer>
 
     <script>
-        // --- Cursor ---
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            cursorDot.style.left = `${clientX}px`; cursorDot.style.top = `${clientY}px`;
-            cursorOutline.style.left = `${clientX}px`; cursorOutline.style.top = `${clientY}px`;
-        });
-
         // --- Itinerary Data ---
         const dayData = {
-            day1: { fullDate: 'Monday, Nov 24', date: 'Nov 24', title: 'Arrival & Welcome', vibe: 'The adventure begins', image: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/557471384.jpg?k=d0bff9e2902248dbf21f94103f6cea1dc4f1c40d05888449524591427eed34db&o=&hp=1', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>~19:30:</strong> Meet coach after customs.</li><li><strong>Travel Time:</strong> Approx. 1.5 hours.</li><li><strong>~21:30:</strong> Arrive at Riu Ocho Rios.</li></ul><h4><i class="fas fa-plane-arrival"></i> The Plan</h4><ul><li>Land at Montego Bay, clear customs, and take our private coach to Ocho Rios for check-in and a late buffet. No other plans - just relax!</li></ul>` },
-            day2: { fullDate: 'Tuesday, Nov 25', date: 'Nov 25', title: 'Resort Relaxation', vibe: 'Soak up the sun in Ocho Rios', video: 'https://www.youtube.com/embed/V_NOM55feJI', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-umbrella-beach"></i> The Plan</h4><ul><li><strong>09:00:</strong> Group breakfast.</li><li><strong>All Day:</strong> Enjoy the resort! Lounge at the infinity pool, explore the beach, or book a spa treatment.</li><li><strong>17:00:</strong> Sunset cocktails on the terrace.</li></ul>` },
-            day3: { fullDate: 'Wednesday, Nov 26', date: 'Nov 26', title: 'Negril Adventure', vibe: 'Cliffs, beaches & lighthouses', video: 'https://www.youtube.com/embed/pagnJ7hGJt4', mapUrl: 'https://maps.google.com/maps?q=Negril%20Jamaica&t=&z=13&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>07:30:</strong> Depart Riu Ocho Rios.</li><li><strong>Travel Time:</strong> Approx. 3 hours.</li><li><strong>18:30:</strong> Depart Negril.</li><li><strong>Arrival at Hotel:</strong> ~21:30.</li></ul><h4><i class="fas fa-sun"></i> The Plan</h4><ul><li>It's a big day out! We're heading to the legendary west coast to chill on the world-famous 7 Mile Beach, grab some epic photos at the old Lighthouse, and watch the brave (or crazy!) cliff divers at Rick’s Café as the sun goes down.</li></ul><h4><i class="fas fa-gem"></i> Local Gems & Hotspots</h4><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Seven+Mile+Beach+Negril" target="_blank" class="location-link">Seven Mile Beach <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Negril+Lighthouse" target="_blank" class="location-link">Negril Lighthouse <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Rick's+Cafe+Jamaica" target="_blank" class="location-link">Rick's Café <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Booby+Cay+Island+Negril" target="_blank" class="location-link">Booby Cay Island <i class="fas fa-external-link-alt"></i></a> (Underrated Gem)</li></ul>` },
-            day4: { fullDate: 'Thursday, Nov 27', date: 'Nov 27', title: 'Dunn’s River & Rafting', vibe: 'Iconic waterfall adventure', video: 'https://www.youtube.com/embed/4a_rP5NRa_I', mapUrl: 'https://maps.google.com/maps?q=Dunn%27s%20River%20Falls&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>13:00:</strong> Depart Riu Ocho Rios.</li><li><strong>Travel Time:</strong> Approx. 15 mins.</li><li><strong>Activity Time:</strong> 3 hours for falls & rafting.</li><li><strong>~16:30:</strong> Return to hotel.</li></ul><h4><i class="fas fa-water"></i> The Plan</h4><ul><li>Time to tackle a Jamaican icon! We'll spend the afternoon climbing the incredible Dunn's River Falls. If climbing's not your thing, no worries – there's a brilliant walkway alongside for amazing photos without getting wet. Afterwards, we'll chill out with a gentle bamboo raft ride down the river.</li></ul>` },
-            day5: { fullDate: 'Friday, Nov 28', date: 'Nov 28', title: 'Free Day', vibe: 'Your adventure, your choice', image: 'https://images.unsplash.com/photo-1542359649-31e03cdde627?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Kingston%20Jamaica&t=&z=13&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-map-signs"></i> Your Day, Your Way</h4><p>Today is all about you! Choose your own perfect Jamaican experience from these amazing options:</p><h4>Option 1: Ultimate Resort Relaxation</h4><p>Make the most of our beautiful, all-inclusive hotel. Relax by the pool, enjoy the private beach, and let the cocktails flow. No travel, just pure bliss.</p><h4>Option 2: Explore Ocho Rios Locally</h4><p>Take a short taxi ride to discover the gems right on our doorstep. Check the 'Jamaica Experiences' section for a full list of ideas and map links!</p><h4>Option 3: Big Island Day Trips</h4><p>For the adventurers, consider a full day trip to another part of the island.</p><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Negril+Jamaica" target="_blank" class="location-link">Negril Day Trip <i class="fas fa-external-link-alt"></i></a> (Beaches & Sunsets)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Kingston+Jamaica" target="_blank" class="location-link">Kingston Day Trip <i class="fas fa-external-link-alt"></i></a> (Culture & History)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Montego+Bay" target="_blank" class="location-link">Montego Bay Day Trip <i class="fas fa-external-link-alt"></i></a> (Shopping & Buzz)</li></ul>` },
-            day6: { fullDate: 'Saturday, Nov 29', date: 'Nov 29', title: 'Free Day', vibe: 'Your adventure, your choice', image: 'https://images.unsplash.com/photo-1598852234320-a1f4a960a3d3?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Ocho%20Rios%20Bay%20Beach&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-map-signs"></i> Your Day, Your Way</h4><p>Another day to design your perfect Jamaican experience! Will you relax or explore?</p><h4>Option 1: Ultimate Resort Relaxation</h4><p>You're on holiday! Enjoy another day of all-inclusive luxury. Maybe try that spa treatment you were thinking about.</p><h4>Option 2: Explore Ocho Rios Locally</h4><p>There's still so much to see nearby! Check the 'Jamaica Experiences' section for more inspiration.</p><h4>Featured Idea: Cricket or Catamaran</h4><p>Today is a great day to organize a group for a friendly cricket match at the local grounds or set sail on a fun-filled catamaran cruise!</p><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Content+Gardens+Cricket+Ground" target="_blank" class="location-link">Content Gardens Cricket Ground <i class="fas fa-external-link-alt"></i></a></li><li><a href="https://www.google.com/maps/search/?api=1&query=Ocho+Rios+Cruise+Port" target="_blank" class="location-link">Ocho Rios Catamaran Port <i class="fas fa-external-link-alt"></i></a></li></ul>` },
-            day7: { fullDate: 'Sunday, Nov 30', date: 'Nov 30', title: 'Portland Paradise', vibe: 'Discover hidden gems', video: 'https://www.youtube.com/embed/y-Ih1D2IgnY', mapUrl: 'https://maps.google.com/maps?q=Portland%20Parish%20Jamaica&t=&z=11&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>08:00:</strong> Depart Riu Ocho Rios.</li><li><strong>Travel Time:</strong> Approx. 2 hours.</li><li><strong>17:00:</strong> Depart Portland.</li><li><strong>Arrival at Hotel:</strong> ~19:00.</li></ul><h4><i class="fas fa-tint"></i> The Plan</h4><ul><li>Get ready for one of the most beautiful days of the trip! We're heading to the lush, green parish of Portland to see the world-famous Blue Lagoon and chill out at the gorgeous, authentic Winifred Beach.</li></ul><h4><i class="fas fa-gem"></i> Local Gems & Hotspots</h4><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Blue+Lagoon+Jamaica" target="_blank" class="location-link">The Blue Lagoon <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Winifred+Beach+Jamaica" target="_blank" class="location-link">Winifred Beach <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Boston+Bay+Jamaica" target="_blank" class="location-link">Boston Bay (for Jerk) <i class="fas fa-external-link-alt"></i></a> (Underrated Gem)</li></ul>` },
-            day8: { fullDate: 'Monday, Dec 01', date: 'Dec 01', title: 'A Day of Surprises', vibe: 'The main event in Ocho Rios', special: true, image: 'https://images.unsplash.com/photo-1519225421980-715cb02cf5d7?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios%20beach%20dining&t=&z=15&ie=UTF8&iwloc=&output=embed', placeholder: `<h4><i class="fas fa-gift"></i> A Special Celebration</h4><p>Today is a day for surprises and creating special memories together. The full plan will be revealed on the day!</p>`, secret: `<h4><i class="fas fa-gift"></i> The Secret Plan</h4><ul><li><strong>16:00 - 18:00:</strong> Time for the big reveal! Let's all meet for group photos & celebratory drinks in our 'Special Celebration Tops'.</li><li><strong>19:30:</strong> We're heading out! We'll leave the hotel for a surprise birthday dinner to celebrate Sue in style.</li><li><strong>Mission:</strong> The most important part - we need to keep this a complete secret from Sue!</li></ul>` },
-            day9: { fullDate: 'Tuesday, Dec 02', date: 'Dec 02', title: 'Resort Chill', vibe: 'Relax and recharge in Ocho Rios', image: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios%20spa&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-cocktail"></i> The Plan</h4><ul><li>A final full day to enjoy the resort's pools, beaches, and bars right here in Ocho Rios.</li></ul>` },
-            day10: { fullDate: 'Wednesday, Dec 03', date: 'Dec 03', title: 'Farewell Dinner', vibe: 'One last memory in Ocho Rios', image: 'https://images.unsplash.com/photo-1600271886712-de5de2242862?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=restaurants%20near%20Riu%20Ocho%20Rios&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-glass-cheers"></i> The Plan</h4><ul><li><strong>20:00:</strong> One last group dinner together at a specialty restaurant at our hotel.</li></ul><h4><i class="fas fa-tshirt"></i> The Look</h4><ul><li>Wear something <strong>Tropical & Bright</strong> for our farewell photos.</li></ul>` },
-            day11: { fullDate: 'Thursday, Dec 04', date: 'Dec 04', title: 'Departure Day', vibe: 'Homeward bound', image: 'https://images.unsplash.com/photo-1571283738545-2c892b157a53?q=80&w=800&auto=format&fit=crop', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>~14:00:</strong> Coach departs for Montego Bay Airport.</li><li><strong>Travel Time:</strong> Approx. 1.5 hours.</li></ul><h4><i class="fas fa-plane-departure"></i> The Plan</h4><ul><li>Enjoy a final Jamaican breakfast before our afternoon departure for the airport.</li></ul>` }
+            day1: { fullDate: 'Monday, Nov 24', date: 'Nov 24', title: 'Island Arrival', vibe: 'The adventure begins', image: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/557471384.jpg?k=d0bff9e2902248dbf21f94103f6cea1dc4f1c40d05888449524591427eed34db&o=&hp=1', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-plane-arrival"></i> The Plan</h4><ul><li>Arrive in Montego Bay, breeze through customs, then transfer to Ocho Rios for check-in and time to settle in.</li></ul>` },
+            day2: { fullDate: 'Tuesday, Nov 25', date: 'Nov 25', title: 'Resort R&R', vibe: 'Soak up the sun in Ocho Rios', video: 'https://www.youtube.com/embed/eLPFA3eSb8o', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-umbrella-beach"></i> The Plan</h4><ul><li><strong>All Day:</strong> Recover from your flight and ease into island life. Lounge by the pool, wander the sandy shores, or enjoy a rejuvenating spa session.</li><li><strong>17:00:</strong> Toast the sunset with cocktails on the terrace. Location details will be confirmed closer to the time.</li></ul>` },
+            day3: { fullDate: 'Wednesday, Nov 26', date: 'Nov 26', title: 'Negril Highlights', vibe: 'Cliffs, beaches & lighthouses', video: 'https://www.youtube.com/embed/pagnJ7hGJt4', mapUrl: 'https://maps.google.com/maps?q=Negril%20Jamaica&t=&z=13&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>07:30:</strong> Depart Riu Ocho Rios.</li><li><strong>Travel Time:</strong> Approx. 3 hours.</li><li><strong>18:30:</strong> Depart Negril.</li><li><strong>Arrival at Hotel:</strong> ~21:30.</li></ul><h4><i class="fas fa-sun"></i> The Plan</h4><ul><li>A full day of adventure awaits! Chill on 7 Mile Beach, take in the views at the old Lighthouse, and witness the fearless cliff divers at Rick’s Café as the golden sun dips below the horizon.</li></ul><h4><i class="fas fa-gem"></i> Local Gems & Hotspots</h4><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Seven+Mile+Beach+Negril" target="_blank" class="location-link">Seven Mile Beach <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Negril+Lighthouse" target="_blank" class="location-link">Negril Lighthouse <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Rick's+Cafe+Jamaica" target="_blank" class="location-link">Rick's Café <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Booby+Cay+Island+Negril" target="_blank" class="location-link">Booby Cay Island <i class="fas fa-external-link-alt"></i></a> (Underrated Gem)</li></ul>` },
+            day4: { fullDate: 'Thursday, Nov 27', date: 'Nov 27', title: 'Dunn’s River & Rafting', vibe: 'Iconic waterfall adventure', video: 'https://www.youtube.com/embed/4a_rP5NRa_I', mapUrl: 'https://maps.google.com/maps?q=Dunn%27s%20River%20Falls&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>13:00:</strong> Depart Riu Ocho Rios.</li><li><strong>Travel Time:</strong> Approx. 15 mins.</li><li><strong>Activity Time:</strong> 3 hours for falls & rafting.</li><li><strong>~16:30:</strong> Return to hotel.</li></ul><h4><i class="fas fa-water"></i> The Plan</h4><ul><li>Get ready to conquer a Jamaican icon! Spend the afternoon climbing the spectacular Dunn’s River Falls. Prefer to stay dry? The scenic walkway alongside still offers plenty of spots to dip your toes in the falls. Afterward, explore the small beach and craft market nearby, or unwind on a gentle bamboo raft ride down the river.</li></ul>` },
+            day5: { fullDate: 'Friday, Nov 28', date: 'Nov 28', title: 'Your Day, Your Way', vibe: 'Your adventure, your choice', image: 'https://images.unsplash.com/photo-1542359649-31e03cdde627?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Kingston%20Jamaica&t=&z=13&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-map-signs"></i> The Plan</h4><p>Today is all about you! Pick your own island adventure and soak up those vibes:</p><h4>Option 1: Ultimate Resort Chill</h4><p>Kick back and soak up the sun at our beautiful all-inclusive resort. Lounge by the pool, stroll the private beach, sip on tropical cocktails, and let the island magic work its wonders.</p><h4>Option 2: Explore Ocho Rios Locally</h4><p>Take a quick taxi ride and discover the hidden gems just around the corner. Check the Jamaica Experiences section for ideas and map links — from local eats to colorful markets, there’s plenty to spark your wanderlust.</p><h4>Option 3: Big Island Adventures</h4><p>For the adventurers, consider a full-day trip to another part of the island.</p><ul><li>Kingston is safest when explored as part of a group.</li><li>Montego Bay is perfect for couples looking for a more relaxed, independent day out.</li></ul>` },
+            day6: { fullDate: 'Saturday, Nov 29', date: 'Nov 29', title: 'Saturday Vibes & Resort Fun', vibe: 'Relax and recharge in Ocho Rios', image: 'https://res.cloudinary.com/djcyhbk2e/image/upload/f_auto,q_35,w_1200/v1/gvv/prod/wad1pqgr4zmje663akhh', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios%20spa&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-cocktail"></i> The Plan</h4><ul><li>It's Saturday! Let's make the most of it. Kick back and soak up those island vibes! Lounge by the pool, stroll along the sandy beach, sip on tropical cocktails 🍹, and let the gentle Jamaican rhythms carry you into pure relaxation.</li></ul>` },
+            day7: { fullDate: 'Sunday, Nov 30', date: 'Nov 30', title: 'Portland Paradise', vibe: 'Discover hidden gems', video: 'https://www.youtube.com/embed/teIR5zgFl5g', videoStart: 442, mapUrl: 'https://maps.google.com/maps?q=Portland%20Parish%20Jamaica&t=&z=11&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>09:00:</strong> Depart Riu Ocho Rios.</li><li><strong>Travel Time:</strong> Approx. 2 hours.</li><li><strong>17:00:</strong> Depart Portland.</li><li><strong>Arrival at Hotel:</strong> ~19:00.</li></ul><h4><i class="fas fa-tint"></i> The Plan</h4><ul><li>A picture-perfect day awaits! Journey to the verdant parish of Portland, enjoy the crystal waters of the world-famous Blue Lagoon, and chill out at the authentic, sun-soaked Winifred Beach.</li></ul><h4><i class="fas fa-gem"></i> Local Gems & Hotspots</h4><ul><li><a href="https://www.google.com/maps/search/?api=1&query=Blue+Lagoon+Jamaica" target="_blank" class="location-link">The Blue Lagoon <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Winifred+Beach+Jamaica" target="_blank" class="location-link">Winifred Beach <i class="fas fa-external-link-alt"></i></a> (Hotspot)</li><li><a href="https://www.google.com/maps/search/?api=1&query=Boston+Bay+Jamaica" target="_blank" class="location-link">Boston Bay (for Jerk) <i class="fas fa-external-link-alt"></i></a> (Underrated Gem)</li></ul>` },
+            day8: { fullDate: 'Monday, Dec 01', date: 'Dec 01', title: 'A Day of Surprises', vibe: 'The main event in Ocho Rios', special: true, image: 'https://images.unsplash.com/photo-1519225421980-715cb02cf5d7?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=Riu%20Ocho%20Rios%20beach%20dining&t=&z=15&ie=UTF8&iwloc=&output=embed', placeholder: `<h4><i class="fas fa-gift"></i> A Special Celebration</h4><p>Today is a day for surprises and creating special memories together. The full plan will be revealed on the day!</p>`, secret: `<h4><i class="fas fa-gift"></i> The Secret Plan</h4><ul><li>It’s time for the big birthday reveal! From 5:00 to 6:30 PM, we’ll gather for group photos and celebratory drinks in our ‘Special Celebration Tops’ to toast Sue’s special day. After that, we’ve got an hour to get all glammed up and ready for a fabulous dinner out!</li></ul><h4><i class="fas fa-user-secret"></i> Top Secret</h4><p>Shhh… our mission is to keep everything completely under wraps from Sue!</p>` },
+            day9: { fullDate: 'Tuesday, Dec 02', date: 'Dec 02', title: 'Boat Day', vibe: 'Sail the Caribbean Sea', image: 'https://bookjamaicaexcursions.com/wp-content/uploads/2012/11/Cool-Runnings.jpg', mapUrl: 'https://maps.google.com/maps?q=Ocho%20Rios%20Bay%20Beach&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-ship"></i> The Plan</h4><p>We suggest organising this adventure once we get there, but we’ve kept this day free just for it! Set sail along Jamaica’s stunning coastline, swim, snorkel, or simply relax on deck with a cocktail — it’s all about soaking up the island vibes and moments.</p>` },
+            day10: { fullDate: 'Wednesday, Dec 03', date: 'Dec 03', title: 'Final Day in Paradise', vibe: 'One last island feast with the gang', image: 'https://images.unsplash.com/photo-1600271886712-de5de2242862?q=80&w=800&auto=format&fit=crop', mapUrl: 'https://maps.google.com/maps?q=restaurants%20near%20Riu%20Ocho%20Rios&t=&z=15&ie=UTF8&iwloc=&output=embed', content: `<h4><i class="fas fa-sun"></i> The Plan</h4><p>Final day vibes! Whether you want to tick off any missed adventures or just relax with a cocktail in hand, it’s all about soaking up the island one last time.</p><h4><i class="fas fa-glass-cheers"></i> 20:00: Farewell Group Dinner</h4><p>It’s our final night together, so let’s make it special! Join us at the hotel’s specialty restaurant for a delicious meal, laughter, and lasting memories.</p><h4><i class="fas fa-tshirt"></i> The Look:</h4><p>Wear something <strong>Tropical & Bright</strong> 🌺🌴 for our farewell photos — the brighter, the better! Let’s end the trip in full island style.</p>` },
+            day11: { fullDate: 'Thursday, Dec 04', date: 'Dec 04', title: 'Departure Day', vibe: 'Homeward bound', image: 'https://www.sandals.com/blog/content/images/2020/01/Frenchman-Cove-Jamaica.jpg', content: `<h4><i class="fas fa-bus"></i> Travel Movements</h4><ul><li><strong>~14:00:</strong> Coach departs for Montego Bay Airport.</li><li><strong>Travel Time:</strong> Approx. 1.5 hours.</li></ul><h4><i class="fas fa-plane-departure"></i> The Plan</h4><ul><li>Savor a final Jamaican breakfast and soak up the island vibes before our afternoon departure for the airport.</li></ul>` }
         };
-        
-        const experiences = [
-            { name: 'Dunn\'s River Falls', region: 'Ocho Rios', category: 'Waterfalls & Swimming', summary: 'World-famous waterfall climbing', address: 'Ocho Rios, St. Ann Parish, Jamaica', driveTime: '< 30 mins', priceRange: '$25-35' },
-            { name: 'Blue Hole (Secret Falls)', region: 'Ocho Rios', category: 'Waterfalls & Swimming', summary: 'Cliff jumping, turquoise pools', address: '4 miles east of Ocho Rios town, St. Ann', driveTime: '< 30 mins', priceRange: '$15-25' },
-            { name: 'Mystic Mountain', region: 'Ocho Rios', category: 'Adventure & Zip Lines', summary: 'Bobsled, chairlift, zipline', address: '3770 North Coast Hwy, Ocho Rios', driveTime: '< 30 mins', priceRange: '$45-85' },
-            { name: 'Seven Mile Beach', region: 'Negril', category: 'Beaches', summary: 'Iconic sunset beach', address: 'Norman Manley Blvd, Negril', driveTime: '> 2 hours', priceRange: 'Free-$20' },
-            { name: 'Rick\'s Café', region: 'Negril', category: 'Nightlife & Entertainment', summary: 'Cliff jumping, sunset views', address: 'West End Road, Negril', driveTime: '> 2 hours', priceRange: '$15-30' },
-            { name: 'Martha Brae River Rafting', region: 'Montego Bay', category: 'Water Sports', summary: 'Bamboo river rafting', address: 'Martha Brae, Falmouth, Trelawny', driveTime: '1-2 hours', priceRange: '$65-85' },
-            { name: 'Rose Hall Great House', region: 'Montego Bay', category: 'Cultural & Historical', summary: 'Haunted plantation house', address: 'Rose Hall, St. James Parish', driveTime: '1-2 hours', priceRange: '$20-30' },
-            { name: 'Luminous Lagoon', region: 'North Coast', category: 'Hidden Gems', summary: 'Bioluminescent water', address: 'Luminous Lagoon, Falmouth', driveTime: '~1 hour', priceRange: '$25-35' },
-            { name: 'YS Falls', region: 'South Coast', category: 'Waterfalls & Swimming', summary: '7-tiered waterfall', address: 'YS Estate, St. Elizabeth Parish', driveTime: '> 2 hours', priceRange: '$18-25' },
-            { name: 'Pelican Bar', region: 'South Coast', category: 'Hidden Gems', summary: 'Bar on stilts in ocean', address: 'Floyd\'s Pelican Bar, Parottee Bay', driveTime: '> 2 hours', priceRange: '$30-50' },
-            { name: 'Bob Marley Museum', region: 'Kingston', category: 'Cultural & Historical', summary: 'Reggae legend\'s home', address: '56 Hope Rd, Kingston 6', driveTime: '1-2 hours', priceRange: '$25-35' },
-            { name: 'Blue Mountain Peak', region: 'Blue Mountains', category: 'Adventure & Zip Lines', summary: 'Highest peak in Jamaica', address: 'Blue Mountain-John Crow National Park', driveTime: '> 2 hours', priceRange: '$75-120' },
-            { name: 'Devon House', region: 'Kingston', category: 'Cultural & Historical', summary: 'Historic mansion, ice cream', address: '26 Hope Rd, Kingston 10', driveTime: '1-2 hours', priceRange: '$12-20' },
-            { name: 'Reach Falls', region: 'Portland', category: 'Waterfalls & Swimming', summary: 'Natural water slides', address: 'Reach Falls, Portland Parish', driveTime: '> 2 hours', priceRange: '$10-15' },
-            { name: 'Frenchman\'s Cove', region: 'Portland', category: 'Beaches', summary: 'River meets sea beach', address: 'Frenchman\'s Cove, Port Antonio', driveTime: '> 2 hours', priceRange: '$10-15' },
-            { name: 'Rio Grande Rafting', region: 'Portland', category: 'Water Sports', summary: 'Original river rafting', address: 'Rio Grande Valley, Portland', driveTime: '> 2 hours', priceRange: '$65-85' },
-            { name: 'Blue Lagoon', region: 'Portland', category: 'Waterfalls & Swimming', summary: 'Deep blue swimming hole', address: 'Port Antonio, Portland Parish', driveTime: '> 2 hours', priceRange: '$10-20' },
-            { name: 'Dolphin Cove', region: 'Ocho Rios', category: 'Wildlife & Nature', summary: 'Swim with dolphins', address: 'Dolphin Cove, Ocho Rios', driveTime: '< 30 mins', priceRange: '$65-150' },
-            { name: 'Konoko Falls & Garden', region: 'Ocho Rios', category: 'Waterfalls & Swimming', summary: 'Private falls, museum', address: 'Milford Rd, Ocho Rios', driveTime: '< 30 mins', priceRange: '$15-25' },
-            { name: 'White River Tubing', region: 'Ocho Rios', category: 'Water Sports', summary: 'River tubing adventure', address: 'White River, St. Ann Parish', driveTime: '< 30 mins', priceRange: '$35-50' },
-            { name: 'Green Grotto Caves', region: 'North Coast', category: 'Hidden Gems', summary: 'Limestone cave system', address: 'Runaway Bay, St. Ann Parish', driveTime: '~1 hour', priceRange: '$20-30' },
-            { name: 'Negril Lighthouse', region: 'Negril', category: 'Cultural & Historical', summary: 'Historic lighthouse', address: 'West End Road, Negril', driveTime: '> 2 hours', priceRange: '$5-10' },
-            { name: 'Mayfield Falls', region: 'South Coast', category: 'Waterfalls & Swimming', summary: '21 natural pools', address: 'Mayfield, Westmoreland Parish', driveTime: '> 2 hours', priceRange: '$20-30' },
-            { name: 'Black River Safari', region: 'South Coast', category: 'Wildlife & Nature', summary: 'Crocodile spotting', address: 'Black River, St. Elizabeth', driveTime: '> 2 hours', priceRange: '$25-35' },
-            { name: 'Appleton Estate', region: 'South Coast', category: 'Food & Tours', summary: 'Rum distillery tour', address: 'Nassau Valley, St. Elizabeth', driveTime: '> 2 hours', priceRange: '$25-45' },
-            { name: 'Bamboo Avenue', region: 'South Coast', category: 'Scenic Drives', summary: 'Bamboo canopy drive', address: 'A2 Highway, St. Elizabeth', driveTime: '> 2 hours', priceRange: 'Free' },
-            { name: 'Port Royal', region: 'Kingston', category: 'Cultural & Historical', summary: 'Pirate capital ruins', address: 'Port Royal, Kingston', driveTime: '1-2 hours', priceRange: '$10-20' },
-            { name: 'Hellshire Beach', region: 'Kingston', category: 'Beaches', summary: 'Local beach, fried fish', address: 'Hellshire, St. Catherine', driveTime: '1-2 hours', priceRange: '$5-10' },
-            { name: 'Spanish Town Square', region: 'Spanish Town', category: 'Cultural & Historical', summary: 'Colonial architecture', address: 'Spanish Town, St. Catherine', driveTime: '1-2 hours', priceRange: 'Free-$10' },
-            { name: 'Goldeneye Beach', region: 'Ocho Rios', category: 'Beaches', summary: 'James Bond beach', address: 'Goldeneye Resort, St. Ann', driveTime: '< 30 mins', priceRange: '$15-30' },
-            { name: 'Fern Gully', region: 'Ocho Rios', category: 'Scenic Drives', summary: 'Fern-lined mountain road', address: 'A3 Highway, St. Ann', driveTime: '< 30 mins', priceRange: 'Free' },
-            { name: 'Nine Mile', region: 'Ocho Rios', category: 'Cultural & Historical', summary: 'Bob Marley birthplace', address: 'Nine Mile, St. Ann Parish', driveTime: '~1 hour', priceRange: '$35-50' },
-            { name: 'Reggae Beach', region: 'Ocho Rios', category: 'Beaches', summary: 'Local reggae beach', address: 'St. Ann\'s Bay area', driveTime: '< 30 mins', priceRange: '$10-15' },
-            { name: 'Catamaran Cruise', region: 'Ocho Rios', category: 'Water Sports', summary: 'Sailing, snorkeling', address: 'Ocho Rios Cruise Port', driveTime: '< 30 mins', priceRange: '$65-95' },
-            { name: 'Doctor\'s Cave Beach', region: 'Montego Bay', category: 'Beaches', summary: 'Famous healing waters', address: 'Gloucester Ave, Montego Bay', driveTime: '1-2 hours', priceRange: '$6-10' },
-            { name: 'Hip Strip', region: 'Montego Bay', category: 'Nightlife & Entertainment', summary: 'Bars, restaurants, shops', address: 'Gloucester Ave, Montego Bay', driveTime: '1-2 hours', priceRange: 'Varies' },
-            { name: 'Greenwood Great House', region: 'Montego Bay', category: 'Cultural & Historical', summary: 'Plantation house museum', address: 'Greenwood, St. James Parish', driveTime: '1-2 hours', priceRange: '$20-30' },
-            { name: 'AquaSol Beach Park', region: 'Montego Bay', category: 'Beaches', summary: 'Water sports, beach club', address: 'Walter Fletcher Beach', driveTime: '1-2 hours', priceRange: '$5-15' },
-            { name: 'Rafters Rest', region: 'North Coast', category: 'Food & Tours', summary: 'Riverside dining', address: 'Martha Brae River area', driveTime: '1-2 hours', priceRange: '$20-40' },
-            { name: 'Half Moon Beach', region: 'Montego Bay', category: 'Beaches', summary: 'Crescent-shaped beach', address: 'Half Moon Resort area', driveTime: '1-2 hours', priceRange: '$10-25' },
-            { name: 'Kool Runnings', region: 'Negril', category: 'Adventure & Zip Lines', summary: 'Water park, go-karts', address: 'Norman Manley Blvd, Negril', driveTime: '> 2 hours', priceRange: '$25-45' },
-            { name: 'Times Square', region: 'Negril', category: 'Shopping', summary: 'Duty-free shopping', address: 'Norman Manley Blvd, Negril', driveTime: '> 2 hours', priceRange: 'Varies' },
-            { name: 'Royal Palm Reserve', region: 'Negril', category: 'Wildlife & Nature', summary: 'Bird watching, nature', address: 'Negril Environmental Protection Area', driveTime: '> 2 hours', priceRange: '$10-15' },
-            { name: 'Bloody Bay', region: 'Negril', category: 'Beaches', summary: 'Pristine coral beach', address: 'Northern Negril coastline', driveTime: '> 2 hours', priceRange: 'Free-$10' },
-            { name: 'Sunset at the Palms', region: 'Negril', category: 'Beaches', summary: 'Adults-only beach', address: 'Norman Manley Blvd, Negril', driveTime: '> 2 hours', priceRange: 'Resort access' },
-            { name: 'Somerset Falls', region: 'Portland', category: 'Waterfalls & Swimming', summary: 'Hidden jungle falls', address: 'Hope Bay, Portland Parish', driveTime: '> 2 hours', priceRange: '$10-20' },
-            { name: 'Winnifred Beach', region: 'Portland', category: 'Beaches', summary: 'Local public beach', address: 'Fairy Hill, Portland Parish', driveTime: '> 2 hours', priceRange: '$2-5' },
-            { name: 'Holywell Recreation Area', region: 'Blue Mountains', category: 'Wildlife & Nature', summary: 'Mountain hiking, camping', address: 'Blue Mountain National Park', driveTime: '> 2 hours', priceRange: '$5-15' },
-            { name: 'Strawberry Hill', region: 'Blue Mountains', category: 'Scenic Drives', summary: 'Mountain resort views', address: 'Irish Town, St. Andrew', driveTime: '> 2 hours', priceRange: '$20-40' },
-            { name: 'Crystal Springs', region: 'Blue Mountains', category: 'Hidden Gems', summary: 'Natural mineral springs', address: 'Crystal Springs, Portland', driveTime: '> 2 hours', priceRange: '$15-25' },
-            { name: 'Island Village', region: 'Ocho Rios', category: 'Shopping', summary: 'Shopping, dining, entertainment', address: 'Island Village, Ocho Rios', driveTime: '< 30 mins', priceRange: '$10-50' },
-            { name: 'Taj Mahal Shopping Centre', region: 'Montego Bay', category: 'Shopping', summary: 'Local crafts, souvenirs', address: 'Gloucester Ave, Montego Bay', driveTime: '1-2 hours', priceRange: '$5-100' },
-            { name: 'Scotchies Jerk Centre', region: 'Ocho Rios', category: 'Food & Tours', summary: 'Authentic jerk cuisine', address: 'Drax Hall, St. Ann', driveTime: '< 30 mins', priceRange: '$10-20' },
-            { name: 'Miss T\'s Kitchen', region: 'Ocho Rios', category: 'Food & Tours', summary: 'Traditional Jamaican cooking', address: 'Boscobel, St. Ann', driveTime: '< 30 mins', priceRange: '$15-25' },
-            { name: 'Rockhouse Hotel Spa', region: 'Negril', category: 'Wellness & Spas', summary: 'Cliffside spa treatments', address: 'West End Road, Negril', driveTime: '> 2 hours', priceRange: '$80-150' },
-            { name: 'Tensing Pen Spa', region: 'Negril', category: 'Wellness & Spas', summary: 'Holistic wellness retreat', address: 'West End Road, Negril', driveTime: '> 2 hours', priceRange: '$60-120' },
-            { name: 'Coyaba Beach Resort Spa', region: 'Montego Bay', category: 'Wellness & Spas', summary: 'Full-service spa', address: 'Rose Hall, St. James', driveTime: '1-2 hours', priceRange: '$70-130' },
-            { name: 'Harmony Cove', region: 'Ocho Rios', category: 'Hidden Gems', summary: 'Secluded beach cove', address: 'Near Tower Isle, St. Ann', driveTime: '< 30 mins', priceRange: '$5-15' },
-            { name: 'James Bond Beach', region: 'Ocho Rios', category: 'Beaches', summary: 'Movie filming location', address: 'Oracabessa, St. Ann', driveTime: '< 30 mins', priceRange: '$5-15' },
-            { name: 'Firefly Estate', region: 'Ocho Rios', category: 'Cultural & Historical', summary: 'Noel Coward\'s former home', address: 'Grants Pen, St. Ann', driveTime: '~1 hour', priceRange: '$15-25' },
-            { name: 'Rio Nuevo Battle Site', region: 'Ocho Rios', category: 'Cultural & Historical', summary: 'Historic battlefield', address: 'Rio Nuevo, St. Ann', driveTime: '< 30 mins', priceRange: 'Free-$5' },
-            { name: 'Seville Heritage Park', region: 'North Coast', category: 'Cultural & Historical', summary: 'Spanish colonial ruins', address: 'Seville, St. Ann', driveTime: '~1 hour', priceRange: '$10-15' },
-            { name: 'Cranbrook Flower Forest', region: 'North Coast', category: 'Wildlife & Nature', summary: 'Botanical gardens, hiking', address: 'Laughlands, St. Ann', driveTime: '~1 hour', priceRange: '$8-12' },
-            { name: 'Chukka Ocean Outpost', region: 'Ocho Rios', category: 'Adventure & Zip Lines', summary: 'Zip lines, ATV tours', address: 'Ocean Village, St. Ann', driveTime: '< 30 mins', priceRange: '$75-120' },
-            { name: 'Rainforest Zipline', region: 'Ocho Rios', category: 'Adventure & Zip Lines', summary: 'Canopy zip line tour', address: 'Mystic Mountain area', driveTime: '< 30 mins', priceRange: '$45-65' },
-            { name: 'Horseback Riding on Beach', region: 'Ocho Rios', category: 'Adventure & Zip Lines', summary: 'Beach and water riding', address: 'Various operators, St. Ann', driveTime: '< 30 mins', priceRange: '$65-85' },
-            { name: 'ATV Adventure Tours', region: 'Ocho Rios', category: 'Adventure & Zip Lines', summary: 'Off-road mountain trails', address: 'Various locations, St. Ann', driveTime: '< 30 mins', priceRange: '$75-95' },
-            { name: 'Margaritaville', region: 'Montego Bay', category: 'Nightlife & Entertainment', summary: 'Beach club, water sports', address: 'Gloucester Ave, Montego Bay', driveTime: '1-2 hours', priceRange: '$20-40' },
-            { name: 'Coral Cliff Gaming Lounge', region: 'Montego Bay', category: 'Nightlife & Entertainment', summary: 'Casino, entertainment', address: 'Rose Hall, St. James', driveTime: '1-2 hours', priceRange: '$25-100' },
-            { name: 'Blue Beat Jazz & Blues Bar', region: 'Montego Bay', category: 'Nightlife & Entertainment', summary: 'Live music, cocktails', address: 'Gloucester Ave, Montego Bay', driveTime: '1-2 hours', priceRange: '$15-30' },
-            { name: 'Pier 1', region: 'Montego Bay', category: 'Nightlife & Entertainment', summary: 'Waterfront dining, nightlife', address: 'Howard Cooke Blvd, Montego Bay', driveTime: '1-2 hours', priceRange: '$20-40' },
-            { name: 'The Brewery', region: 'Kingston', category: 'Nightlife & Entertainment', summary: 'Craft beer, live music', address: 'Red Hills Rd, Kingston', driveTime: '1-2 hours', priceRange: '$15-35' },
-            { name: 'Usain Bolt\'s Tracks & Records', region: 'Kingston', category: 'Food & Tours', summary: 'Sports bar, Jamaican cuisine', address: 'Marketplace, Kingston', driveTime: '1-2 hours', priceRange: '$15-30' },
-            { name: 'Hope Botanical Gardens', region: 'Kingston', category: 'Wildlife & Nature', summary: '200-acre botanical gardens', address: 'Old Hope Rd, Kingston', driveTime: '1-2 hours', priceRange: '$5-10' },
-            { name: 'Emancipation Park', region: 'Kingston', category: 'Wildlife & Nature', summary: 'Urban park, sculptures', address: 'Oxford Rd, Kingston', driveTime: '1-2 hours', priceRange: 'Free' },
-            { name: 'National Gallery', region: 'Kingston', category: 'Cultural & Historical', summary: 'Jamaican art collection', address: 'Ocean Blvd, Kingston', driveTime: '1-2 hours', priceRange: '$5-15' },
-            { name: 'Institute of Jamaica', region: 'Kingston', category: 'Cultural & Historical', summary: 'Natural history museum', address: 'East St, Kingston', driveTime: '1-2 hours', priceRange: '$3-8' },
-            { name: 'Tuff Gong Studios', region: 'Kingston', category: 'Cultural & Historical', summary: 'Bob Marley\'s recording studio', address: 'Marcus Garvey Dr, Kingston', driveTime: '1-2 hours', priceRange: '$25-35' },
-            { name: 'Trench Town Culture Yard', region: 'Kingston', category: 'Cultural & Historical', summary: 'Bob Marley\'s early home', address: 'Trench Town, Kingston', driveTime: '1-2 hours', priceRange: '$15-25' },
-            { name: 'Downtown Kingston Walking Tour', region: 'Kingston', category: 'Cultural & Historical', summary: 'Historic city center', address: 'Various downtown locations', driveTime: '1-2 hours', priceRange: '$20-35' },
-            { name: 'Blue Mountain Coffee Tour', region: 'Blue Mountains', category: 'Food & Tours', summary: 'World-famous coffee tasting', address: 'Various plantations', driveTime: '> 2 hours', priceRange: '$35-65' },
-            { name: 'Craighton Estate Coffee Tour', region: 'Blue Mountains', category: 'Food & Tours', summary: 'Plantation tour, tasting', address: 'Irish Town, St. Andrew', driveTime: '> 2 hours', priceRange: '$25-40' },
-            { name: 'Old Tavern Coffee Estate', region: 'Blue Mountains', category: 'Food & Tours', summary: 'Historic coffee plantation', address: 'Blue Mountain area', driveTime: '> 2 hours', priceRange: '$30-45' },
-            { name: 'Mavis Bank Coffee Factory', region: 'Blue Mountains', category: 'Food & Tours', summary: 'Coffee processing tour', address: 'Mavis Bank, St. Andrew', driveTime: '> 2 hours', priceRange: '$20-35' },
-            { name: 'Newcastle Military Museum', region: 'Blue Mountains', category: 'Cultural & Historical', summary: 'Military history, mountain views', address: 'Newcastle, St. Andrew', driveTime: '> 2 hours', priceRange: '$5-10' },
-            { name: 'Catherine\'s Peak', region: 'Blue Mountains', category: 'Adventure & Zip Lines', summary: 'Second highest peak hike', address: 'Blue Mountains area', driveTime: '> 2 hours', priceRange: '$40-75' },
-            { name: 'Clydesdale Waterfall', region: 'Blue Mountains', category: 'Waterfalls & Swimming', summary: 'Mountain waterfall hike', address: 'Blue Mountains area', driveTime: '> 2 hours', priceRange: '$15-25' },
-            { name: 'Cinchona Botanical Gardens', region: 'Blue Mountains', category: 'Wildlife & Nature', summary: 'High-altitude gardens', address: 'Cinchona, St. Andrew', driveTime: '> 2 hours', priceRange: '$8-15' },
-            { name: 'Boston Bay Beach', region: 'Portland', category: 'Beaches', summary: 'Surfing, jerk chicken', address: 'Boston Bay, Portland', driveTime: '> 2 hours', priceRange: 'Free-$5' },
-            { name: 'San San Beach', region: 'Portland', category: 'Beaches', summary: 'Private beach club', address: 'San San, Portland', driveTime: '> 2 hours', priceRange: '$5-10' },
-            { name: 'Monkey Island', region: 'Portland', category: 'Hidden Gems', summary: 'Small island exploration', address: 'Blue Lagoon area, Portland', driveTime: '> 2 hours', priceRange: '$10-20' },
-            { name: 'Navy Island', region: 'Portland', category: 'Hidden Gems', summary: 'Private island day trip', address: 'Port Antonio harbor', driveTime: '> 2 hours', priceRange: '$15-30' },
-            { name: 'Errol Flynn Marina', region: 'Portland', category: 'Water Sports', summary: 'Yacht charters, fishing', address: 'Port Antonio, Portland', driveTime: '> 2 hours', priceRange: '$25-75' },
-            { name: 'Dragon Bay Beach', region: 'Portland', category: 'Beaches', summary: 'Secluded resort beach', address: 'Dragon Bay, Portland', driveTime: '> 2 hours', priceRange: '$10-15' },
-            { name: 'Goblin Hill', region: 'Portland', category: 'Scenic Drives', summary: 'Scenic mountain drive', address: 'San San area, Portland', driveTime: '> 2 hours', priceRange: 'Free-$10' },
-            { name: 'Buff Bay River', region: 'Portland', category: 'Water Sports', summary: 'River kayaking', address: 'Buff Bay, Portland', driveTime: '> 2 hours', priceRange: '$20-35' },
-            { name: 'Manchioneal Beach', region: 'Portland', category: 'Beaches', summary: 'Remote fishing village beach', address: 'Manchioneal, Portland', driveTime: '> 2 hours', priceRange: 'Free-$5' },
-            { name: 'Mandeville Town Centre', region: 'Mandeville', category: 'Shopping', summary: 'Cool mountain town shopping', address: 'Mandeville, Manchester', driveTime: '1-2 hours', priceRange: '$5-50' },
-            { name: 'Marshall\'s Pen Great House', region: 'Mandeville', category: 'Cultural & Historical', summary: 'Historic great house', address: 'Marshall\'s Pen, Manchester', driveTime: '1-2 hours', priceRange: '$15-25' },
-            { name: 'Milk River Bath', region: 'South Coast', category: 'Wellness & Spas', summary: 'Mineral hot springs', address: 'Milk River, Clarendon', driveTime: '> 2 hours', priceRange: '$15-30' },
-            { name: 'Lover\'s Leap', region: 'South Coast', category: 'Scenic Drives', summary: 'Dramatic cliff views', address: 'Southfield, St. Elizabeth', driveTime: '> 2 hours', priceRange: '$5-10' },
-            { name: 'Alligator Pond Beach', region: 'South Coast', category: 'Beaches', summary: 'Fishing village beach', address: 'Alligator Pond, Manchester', driveTime: '> 2 hours', priceRange: 'Free-$5' },
-            { name: 'Little Ochi', region: 'South Coast', category: 'Food & Tours', summary: 'Famous seafood restaurant', address: 'Alligator Pond, Manchester', driveTime: '> 2 hours', priceRange: '$15-25' },
-            { name: 'Gut River', region: 'South Coast', category: 'Hidden Gems', summary: 'Underground river cave', address: 'Southfield, St. Elizabeth', driveTime: '> 2 hours', priceRange: '$10-20' },
-            { name: 'Accompong Maroon Village', region: 'South Coast', category: 'Cultural & Historical', summary: 'Maroon heritage site', address: 'Accompong, St. Elizabeth', driveTime: '> 2 hours', priceRange: '$20-35' },
-            { name: 'Treasure Beach', region: 'South Coast', category: 'Beaches', summary: 'Authentic fishing community', address: 'Treasure Beach, St. Elizabeth', driveTime: '> 2 hours', priceRange: '$5-15' },
-            { name: 'Jack Sprat Restaurant', region: 'South Coast', category: 'Food & Tours', summary: 'Beachfront dining', address: 'Treasure Beach, St. Elizabeth', driveTime: '> 2 hours', priceRange: '$15-30' },
-            { name: 'Floyd\'s Pelican Bar', region: 'South Coast', category: 'Hidden Gems', summary: 'Famous bar on stilts', address: 'Parottee Bay, St. Elizabeth', driveTime: '> 2 hours', priceRange: '$30-50' },
-            { name: 'Ipswich Beach Caves', region: 'South Coast', category: 'Hidden Gems', summary: 'Beach cave exploration', address: 'Near Treasure Beach', driveTime: '> 2 hours', priceRange: '$10-15' },
-            { name: 'Font Hill Nature Preserve', region: 'South Coast', category: 'Wildlife & Nature', summary: 'Bird watching, hiking', address: 'Font Hill, St. Elizabeth', driveTime: '> 2 hours', priceRange: '$15-25' },
-            { name: 'Sunset Resort Water Sports', region: 'Montego Bay', category: 'Water Sports', summary: 'Jet skiing, parasailing', address: 'Sunset Beach Resort area', driveTime: '1-2 hours', priceRange: '$35-85' },
-            { name: 'Tropical Bliss Spa', region: 'Ocho Rios', category: 'Wellness & Spas', summary: 'Full-service spa', address: 'Ocho Rios hotel district', driveTime: '< 30 mins', priceRange: '$65-120' },
-            { name: 'Bamboo Blu Beach', region: 'Ocho Rios', category: 'Beaches', summary: 'Boutique beach experience', address: 'Near St. Ann\'s Bay', driveTime: '< 30 mins', priceRange: '$8-18' },
-            { name: 'Coconut Grove Shopping Plaza', region: 'Ocho Rios', category: 'Shopping', summary: 'Duty-free shopping', address: 'Main St, Ocho Rios', driveTime: '< 30 mins', priceRange: '$10-75' },
-            { name: 'Ocho Rios Craft Park', region: 'Ocho Rios', category: 'Shopping', summary: 'Local artisan crafts', address: 'Main St, Ocho Rios', driveTime: '< 30 mins', priceRange: '$5-50' },
-            { name: 'Sunset Boulevard', region: 'Montego Bay', category: 'Scenic Drives', summary: 'Coastal scenic drive', address: 'Along coastline, St. James', driveTime: '1-2 hours', priceRange: 'Free' },
-            { name: 'Montego Bay Cultural Centre', region: 'Montego Bay', category: 'Cultural & Historical', summary: 'Local history museum', address: 'Sam Sharpe Square, Montego Bay', driveTime: '1-2 hours', priceRange: '$8-15' },
-            { name: 'Cornwall Beach', region: 'Montego Bay', category: 'Beaches', summary: 'Popular public beach', address: 'Gloucester Ave, Montego Bay', driveTime: '1-2 hours', priceRange: '$3-8' },
-            { name: 'Dead End Beach Bar', region: 'Montego Bay', category: 'Nightlife & Entertainment', summary: 'Local beach bar', address: 'Dead End Beach, St. James', driveTime: '1-2 hours', priceRange: '$15-35' },
-            { name: 'Negril Hills Golf Club', region: 'Negril', category: 'Adventure & Zip Lines', summary: '18-hole golf course', address: 'Sheffield Rd, Negril', driveTime: '> 2 hours', priceRange: '$65-95' },
-        ];
         
         // --- All Other JavaScript Logic (Modals, Countdown, Nav, Filters etc.) ---
         
@@ -570,7 +393,7 @@
             const dayItem = document.createElement('div');
             dayItem.className = 'day-item';
             dayItem.onclick = () => openDetailsModal(dayKey);
-            dayItem.innerHTML = `<div class="day-info"><span class="day-number">${dayKey.replace('day', '').padStart(2, '0')}</span><div><div class="day-title">${day.title}</div><div class="day-vibe">${day.vibe}</div></div></div><div class="day-date">${day.date}</div><i class="fas ${day.special ? 'fa-lock' : 'fa-arrow-right'}"></i>`;
+            dayItem.innerHTML = `<div class="day-info"><span class="day-number">${dayKey.replace('day', '').padStart(2, '0')}</span><div class="day-title-container"><div class="day-title">${day.title} <span class="day-date-inline">(${day.date})</span></div><div class="day-vibe">${day.vibe}</div></div></div><i class="fas ${day.special ? 'fa-lock' : 'fa-arrow-right'}"></i>`;
             itineraryList.appendChild(dayItem);
         });
 
@@ -595,7 +418,17 @@
             }
             
             if (data.video) {
-                mediaContainer.innerHTML = `<iframe src="${data.video}?autoplay=1&mute=1&loop=1&playlist=${data.video.split('/').pop()}&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                let videoId;
+                if (data.video.includes('youtu.be')) {
+                    videoId = data.video.split('/').pop().split('?')[0];
+                } else if (data.video.includes('v=')) {
+                    videoId = data.video.split('v=')[1].split('&')[0];
+                }
+                let videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0`;
+                if(data.videoStart) {
+                    videoUrl += `&start=${data.videoStart}`;
+                }
+                mediaContainer.innerHTML = `<iframe src="${videoUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
             } else {
                 mediaContainer.innerHTML = `<img src="${data.image}" alt="Activity image" onerror="this.parentElement.innerHTML = \`<iframe src='${data.mapUrl}' style='width:100%; height:100%; border:0;' allowfullscreen='' loading='lazy'></iframe>\`">`;
             }
@@ -686,146 +519,6 @@
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('animate'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // --- Experience Filter ---
-        const regionFilters = document.getElementById('region-filters');
-        const timeFilters = document.getElementById('time-filters');
-        const categoryFilters = document.getElementById('category-filters');
-        const cardsContainer = document.getElementById('experience-cards-container');
-        const paginationContainer = document.getElementById('pagination-container');
-        
-        const regions = ['All', ...new Set(experiences.map(e => e.region))];
-        const times = ['All', '< 30 mins', '~1 hour', '1-2 hours', '> 2 hours'];
-        const categories = ['All', ...new Set(experiences.map(e => e.category))];
-
-        regions.forEach(r => {
-            const chip = document.createElement('div');
-            chip.className = 'filter-chip';
-            if(r === 'All') chip.classList.add('active');
-            chip.textContent = r;
-            chip.dataset.filter = r;
-            chip.dataset.type = 'region';
-            regionFilters.appendChild(chip);
-        });
-        
-        times.forEach(t => {
-            const chip = document.createElement('div');
-            chip.className = 'filter-chip';
-            if(t === 'All') chip.classList.add('active');
-            chip.textContent = t;
-            chip.dataset.filter = t;
-            chip.dataset.type = 'time';
-            timeFilters.appendChild(chip);
-        });
-
-        categories.forEach(c => {
-            const chip = document.createElement('div');
-            chip.className = 'filter-chip';
-            if(c === 'All') chip.classList.add('active');
-            chip.textContent = c;
-            chip.dataset.filter = c;
-            chip.dataset.type = 'category';
-            categoryFilters.appendChild(chip);
-        });
-        
-        let currentPage = 1;
-        const rowsPerPage = 5;
-        let filteredExperiences = [...experiences];
-
-        function displayExperiences() {
-            cardsContainer.innerHTML = "";
-            let start = (currentPage - 1) * rowsPerPage;
-            let end = start + rowsPerPage;
-            let paginatedItems = filteredExperiences.slice(start, end);
-
-            paginatedItems.forEach(exp => {
-                const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(exp.address)}`;
-                const card = document.createElement('div');
-                card.className = 'experience-card';
-                card.innerHTML = `
-                    <div class="experience-info">
-                        <div class="name">${exp.name}</div>
-                        <p class="summary">${exp.summary}</p>
-                    </div>
-                    <div class="experience-tags">
-                        <span class="tag-region">${exp.region}</span>
-                        <span class="tag-category">${exp.category}</span>
-                        <span class="tag-time"><i class="fas fa-clock"></i> ${exp.driveTime}</span>
-                        <span class="tag-cost"><i class="fas fa-dollar-sign"></i> ${exp.priceRange}</span>
-                        <a href="${mapLink}" target="_blank" class="location-link"><i class="fas fa-map-marker-alt"></i></a>
-                    </div>
-                `;
-                cardsContainer.appendChild(card);
-            });
-        }
-
-        function setupPagination() {
-            paginationContainer.innerHTML = "";
-            let page_count = Math.ceil(filteredExperiences.length / rowsPerPage);
-            
-            const prevButton = document.createElement('button');
-            prevButton.classList.add('pagination-button');
-            prevButton.innerHTML = '<i class="fas fa-arrow-left"></i> Prev';
-            prevButton.addEventListener('click', () => {
-                if (currentPage > 1) {
-                    currentPage--;
-                    filterAndDisplay(false);
-                }
-            });
-            paginationContainer.appendChild(prevButton);
-
-            const pageInfo = document.createElement('span');
-            pageInfo.innerText = `Page ${currentPage} of ${page_count}`;
-            paginationContainer.appendChild(pageInfo);
-
-            const nextButton = document.createElement('button');
-            nextButton.classList.add('pagination-button');
-            nextButton.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
-            nextButton.addEventListener('click', () => {
-                if (currentPage < page_count) {
-                    currentPage++;
-                    filterAndDisplay(false);
-                }
-            });
-            paginationContainer.appendChild(nextButton);
-            updatePaginationButtons();
-        }
-        
-        function updatePaginationButtons() {
-            const page_count = Math.ceil(filteredExperiences.length / rowsPerPage);
-            document.querySelector('.pagination-container span').innerText = `Page ${currentPage} of ${page_count}`;
-            document.querySelector('.pagination-button:first-child').disabled = currentPage === 1;
-            document.querySelector('.pagination-button:last-child').disabled = currentPage === page_count;
-        }
-
-        function filterAndDisplay(resetPage = true) {
-            const activeRegion = document.querySelector('#region-filters .filter-chip.active').dataset.filter;
-            const activeTime = document.querySelector('#time-filters .filter-chip.active').dataset.filter;
-            const activeCategory = document.querySelector('#category-filters .filter-chip.active').dataset.filter;
-
-            filteredExperiences = experiences.filter(exp => {
-                const regionMatch = activeRegion === 'All' || exp.region === activeRegion;
-                const timeMatch = activeTime === 'All' || exp.driveTime === activeTime;
-                const categoryMatch = activeCategory === 'All' || exp.category === activeCategory;
-                return regionMatch && timeMatch && categoryMatch;
-            });
-            
-            if(resetPage) currentPage = 1;
-            displayExperiences();
-            setupPagination();
-        }
-
-        document.querySelectorAll('.filter-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                const type = chip.dataset.type;
-                document.querySelectorAll(`.filter-chip[data-type="${type}"]`).forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                filterAndDisplay();
-            });
-        });
-
-        // Initial Load
-        filterAndDisplay();
     </script>
 </body>
 </html>
