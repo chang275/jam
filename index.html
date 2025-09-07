@@ -188,17 +188,7 @@
         .checklist-card li { margin-bottom: 1rem; color: var(--text-secondary); display: flex; align-items: center; gap: 1rem;}
         .checklist-card li i { color: var(--deep-emerald); }
         
-        .video-bg-section { position: relative; overflow: hidden; }
-        .video-bg {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: auto; height: auto;
-            min-width: 100%; min-height: 100%;
-            transform: translate(-50%, -50%);
-            z-index: -2;
-            pointer-events: none;
-        }
-        .video-bg-section .container {
+        .glass-container-section .container {
             position: relative; z-index: 2;
             background: rgba(18, 18, 18, 0.5);
             backdrop-filter: blur(20px);
@@ -216,6 +206,13 @@
         }
         .cta-button:hover { transform: scale(1.05); box-shadow: var(--shadow); }
         
+        .cta-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
         .section-divider {
             height: 1px;
             width: 80%;
@@ -256,7 +253,7 @@
             .details-media-container { height: 250px; }
             .details-text { padding: 1.5rem; }
             .modal-nav { width: 35px; height: 35px; font-size: 1.2rem;}
-            .video-bg-section .container { padding: 2rem; }
+            .glass-container-section .container { padding: 2rem; }
         }
     </style>
 </head>
@@ -328,21 +325,24 @@
             </div>
         </section>
 
-        <section id="adventures" class="video-bg-section">
-             <iframe class="video-bg" src="https://www.youtube.com/embed/ZRLLhoNmfMk?autoplay=1&mute=1&loop=1&playlist=ZRLLhoNmfMk&controls=0&vq=hd1080" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <section id="adventures" class="glass-container-section">
             <div class="container fade-in" style="text-align: center;">
                 <h2 class="section-title">Explore Ocho Rios</h2>
-                <p class="section-subtitle">Looking for inspiration for our free days? Click the link below to see all the top-rated attractions, tours, and hidden gems right on our doorstep. Let's find our next adventure!</p>
-                <a href="https://www.tripadvisor.co.uk/Attractions-g147312-Activities-oa0-Ocho_Rios_Saint_Ann_Parish_Jamaica.html" target="_blank" class="cta-button">
-                    <i class="fas fa-map-signs"></i> Explore on TripAdvisor
-                </a>
+                <p class="section-subtitle">Looking for inspiration for our free days? Click the links below to see all the top-rated attractions, tours, and hidden gems right on our doorstep. Let's find our next adventure!</p>
+                <div class="cta-buttons-container">
+                    <a href="https://www.tripadvisor.co.uk/Attractions-g147312-Activities-oa0-Ocho_Rios_Saint_Ann_Parish_Jamaica.html" target="_blank" class="cta-button">
+                        <i class="fas fa-map-signs"></i> Explore Activities
+                    </a>
+                    <a href="https://www.tripadvisor.co.uk/Restaurants-g147312-oa30-Ocho_Rios_Saint_Ann_Parish_Jamaica.html" target="_blank" class="cta-button">
+                        <i class="fas fa-utensils"></i> Find Restaurants
+                    </a>
+                </div>
             </div>
         </section>
         
         <div class="section-divider"></div>
 
-        <section id="memories" class="video-bg-section">
-             <iframe class="video-bg" src="https://www.youtube.com/embed/_MZ7UZ5frCI?autoplay=1&mute=1&loop=1&playlist=_MZ7UZ5frCI&controls=0&start=11&vq=hd1080" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <section id="memories" class="glass-container-section">
             <div class="container fade-in" style="text-align: center;">
                 <h2 class="section-title">Shared Memories</h2>
                 <p class="section-subtitle">This is where our Jamaica story will live on. After the trip, let's all upload our favourite photos and videos to create our shared album of pure joy.</p>
